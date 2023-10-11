@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        velocity = 2;
+        velocity = 1; // Graphite test
         direction = Vector3.zero;
     }
     

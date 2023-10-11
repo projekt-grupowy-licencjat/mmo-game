@@ -1,30 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {   
-    private int velocity;
+    public float moveSpeed = 5.0f;
+    public Rigidbody2D rigidBody;
 
-    private Vector3 direction;
-    
-    // Start is called before the first frame update
-    void Start()
+    private Vector2 movement;
+    readonly float diagonalLimiter = 0.7f;
+
+    private void Start()
     {
-        velocity = 1; // Graphite test
-        direction = Vector3.zero;
-    }
-    
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.A)) direction += Vector3.left;
-        if (Input.GetKey(KeyCode.D)) direction += Vector3.right;
-        if (Input.GetKey(KeyCode.W)) direction += Vector3.up;
-        if (Input.GetKey(KeyCode.S)) direction += Vector3.down;
+        rigidBody = GetComponent<Rigidbody2D>();
         
-        transform.Translate(direction * (velocity * Time.deltaTime));
-        direction = Vector3.zero;
+        // Limiting framerate for testing
+        // QualitySettings.vSyncCount = 0;
+        // Application.targetFrameRate = 30;
     }
+
+    private void Update()
+    {
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+    }
+    
+    private void FixedUpdate()
+    {
+        if (movement.x != 0 && movement.y != 0)
+        {
+            movement *= diagonalLimiter;
+        }
+        
+        rigidBody.MovePosition(rigidBody.position + movement * (moveSpeed * Time.fixedDeltaTime));
+    }
+    
 }

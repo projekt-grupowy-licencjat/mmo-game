@@ -1,15 +1,12 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{   
-    public float moveSpeed = 5.0f;
-    public Rigidbody2D rigidBody;
+public class PlayerController : MonoBehaviour {   
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private Rigidbody2D rigidBody;
 
-    private Vector2 movement;
-    readonly float diagonalLimiter = 0.7f;
+    private Vector2 _movement;
 
-    private void Start()
-    {
+    private void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         
         // Limiting framerate for testing
@@ -17,20 +14,14 @@ public class PlayerController : MonoBehaviour
         // Application.targetFrameRate = 30;
     }
 
-    private void Update()
-    {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+    private void Update() {
+        _movement.x = Input.GetAxisRaw("Horizontal");
+        _movement.y = Input.GetAxisRaw("Vertical");
     }
     
-    private void FixedUpdate()
-    {
-        if (movement.x != 0 && movement.y != 0)
-        {
-            movement *= diagonalLimiter;
-        }
-        
-        rigidBody.MovePosition(rigidBody.position + movement * (moveSpeed * Time.fixedDeltaTime));
+    private void FixedUpdate() {
+        _movement.Normalize();
+        rigidBody.MovePosition(rigidBody.position + _movement * (moveSpeed * Time.fixedDeltaTime));
     }
     
 }

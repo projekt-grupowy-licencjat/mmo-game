@@ -2,16 +2,21 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// TODO: Make dialog box customisable from here
 namespace NPC
 {
     public class NpcController : MonoBehaviour
     {
         public GameObject player;
         public double interactiveDistance;
+        // TODO: should be possible to change from dialoguebox
+        public bool isBusy;
+        
         private bool _isInteractive;
     
         public void Start()
         {
+            isBusy = false;
             _isInteractive = false;
             
             var eventTrigger = gameObject.AddComponent<EventTrigger>();
@@ -57,8 +62,11 @@ namespace NPC
         
         private void OnPointerClickDelegate(BaseEventData data)
         {
-            Debug.Log("test3");
+            if (isBusy) return;
 
+            isBusy = true;
+            var dialogueBox = new GameObject(name+"DialogueBox");
+            dialogueBox.AddComponent<DialogueBox>();
         }
         
         private double CalculateDistanceToPlayer()

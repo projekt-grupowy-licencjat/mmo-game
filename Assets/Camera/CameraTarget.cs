@@ -6,9 +6,7 @@ public class CameraTarget : MonoBehaviour {
     [SerializeField] private new Camera camera;
     [SerializeField] private Transform player;
     [SerializeField] private float threshold;
-    // Start is called before the first frame update
-
-    // Update is called once per frame
+    
     private void Update() {
         var mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
         var position = player.position;

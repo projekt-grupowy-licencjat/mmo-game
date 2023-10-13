@@ -9,7 +9,6 @@ namespace NPC
     {
         public GameObject player;
         public double interactiveDistance;
-        // TODO: should be possible to change from dialoguebox
         public bool isBusy;
         
         private bool _isInteractive;

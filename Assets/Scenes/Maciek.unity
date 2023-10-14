@@ -7084,11 +7084,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorTexturesList:
-  - cursorType: 1
-    texture: {fileID: 2800000, guid: be11b7c70ea21c44ba49b8c6ce1f87a2, type: 3}
-    offset: {x: 18, y: 18}
+  - cursorType: 0
+    texture: {fileID: 2800000, guid: 4987849b1b4e76847abd5bcdcd646f85, type: 3}
+    offset: {x: 0, y: 0}
   - cursorType: 2
-    texture: {fileID: 2800000, guid: b44416ab7a2a6f7429b2fc161024986e, type: 3}
+    texture: {fileID: 2800000, guid: 96e5226b918b96f4aa6dfd3b54aeba0b, type: 3}
     offset: {x: 18, y: 18}
 --- !u!1 &587979762
 GameObject:

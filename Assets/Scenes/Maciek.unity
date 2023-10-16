@@ -7085,11 +7085,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorTexturesList:
   - cursorType: 0
-    texture: {fileID: 2800000, guid: 4987849b1b4e76847abd5bcdcd646f85, type: 3}
-    offset: {x: 0, y: 0}
+    texture: {fileID: 2800000, guid: 4669da2e51d842f4d88d90e84bb4b81c, type: 3}
+    offset: {x: 2, y: 2}
   - cursorType: 2
-    texture: {fileID: 2800000, guid: 96e5226b918b96f4aa6dfd3b54aeba0b, type: 3}
+    texture: {fileID: 2800000, guid: 4d63e77fe66a7e1469d6b6db7ec355b4, type: 3}
     offset: {x: 18, y: 18}
+  - cursorType: 1
+    texture: {fileID: 2800000, guid: 8ba401042926a454a9a26ff6a2464a87, type: 3}
+    offset: {x: 17, y: 1}
 --- !u!1 &587979762
 GameObject:
   m_ObjectHideFlags: 3
@@ -7451,7 +7454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd76c7bcf4ff9b4b8b5625766023b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorType: 0
+  cursorType: 1
 --- !u!61 &1365837296
 BoxCollider2D:
   m_ObjectHideFlags: 0

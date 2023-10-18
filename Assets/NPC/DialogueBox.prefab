@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 1287744996242682821}
   - component: {fileID: 3141971923234827799}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: TalkText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,8 +468,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 81, y: 210}
-  m_SizeDelta: {x: 443.5695, y: 45.8717}
+  m_AnchoredPosition: {x: -255.39, y: -77.9332}
+  m_SizeDelta: {x: 510.78, y: 192.3618}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1287744996242682821
 CanvasRenderer:

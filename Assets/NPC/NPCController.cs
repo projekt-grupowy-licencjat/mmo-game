@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
@@ -14,6 +15,7 @@ namespace NPC
         public double interactiveDistance;
         public bool isBusy;
         [SerializeField] public string prefabAddress = "Assets/NPC/DialogueBox.prefab";
+        [SerializeField] public List<string> dialogueLines;
         
         private AsyncOperationHandle<GameObject> _dialogueHandle; 
         private bool _isInteractive;
@@ -82,6 +84,7 @@ namespace NPC
             GameObject obj = _dialogueHandle.Result;
             var dialogueBox = obj.AddComponent<DialogueBox>();
             dialogueBox.npc = this;
+            dialogueBox.SetUp(dialogueLines);
             Instantiate(obj, transform);
         }
         

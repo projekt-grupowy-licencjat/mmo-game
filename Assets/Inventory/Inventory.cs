@@ -9,10 +9,10 @@ namespace Inventory
         // Refers to the id in the database, eg. player or npc items
         public long entityID;
 
-        private List<Item.Item> items;
+        public List<Item.Item> items;
         
         // should load items from server
-        private void Start()
+        public void Awake()
         {
             throw new NotImplementedException();
         }

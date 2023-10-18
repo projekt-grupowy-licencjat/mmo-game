@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93e36362be35d1f68a1f3a9cea007c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueBoxPrefab: {fileID: 1455599455409991940, guid: 59573733b0b89b0bbbec6228024f912c, type: 3}
   player: {fileID: 624297344}
   interactiveDistance: 5
   isBusy: 0

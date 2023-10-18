@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
-// TODO: Make dialog box customisable from here
+// TODO: Maybe part this big script to two separate scripts?
 namespace NPC
 {
     public class NpcController : MonoBehaviour
@@ -10,13 +13,18 @@ namespace NPC
         public GameObject player;
         public double interactiveDistance;
         public bool isBusy;
+        [SerializeField] public string prefabAddress = "Assets/NPC/DialogueBox.prefab";
         
+        private AsyncOperationHandle<GameObject> _dialogueHandle; 
         private bool _isInteractive;
     
-        public void Start()
+        public IEnumerator Start()
         {
             isBusy = false;
             _isInteractive = false;
+            
+            _dialogueHandle = Addressables.LoadAssetAsync<GameObject>(prefabAddress);
+            yield return _dialogueHandle;
             
             var eventTrigger = gameObject.AddComponent<EventTrigger>();
             
@@ -46,7 +54,12 @@ namespace NPC
         {
             _isInteractive = CalculateDistanceToPlayer() <= interactiveDistance;
         }
-    
+
+        public void OnDestroy()
+        {
+            Addressables.Release(_dialogueHandle);    
+        }
+        
         private void OnPointerEnterDelegate(BaseEventData data)
         {
             Debug.Log("test3");
@@ -62,10 +75,14 @@ namespace NPC
         private void OnPointerClickDelegate(BaseEventData data)
         {
             if (isBusy) return;
-
+            if (!_isInteractive) return;
+            if (_dialogueHandle.Status != AsyncOperationStatus.Succeeded) return;
+            
             isBusy = true;
-            var dialogueBox = new GameObject(name+"DialogueBox");
-            dialogueBox.AddComponent<DialogueBox>();
+            GameObject obj = _dialogueHandle.Result;
+            var dialogueBox = obj.AddComponent<DialogueBox>();
+            dialogueBox.npc = this;
+            Instantiate(obj, transform);
         }
         
         private double CalculateDistanceToPlayer()

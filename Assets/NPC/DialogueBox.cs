@@ -11,32 +11,31 @@ namespace NPC
     public class DialogueBox : MonoBehaviour
     {
         public NpcController npc;
-
-        private List<string> _dialogueLines;
+        public TMP_Text _talkText;
+        public List<string> _dialogueLines;
         private readonly Random _rnd = new Random();
-        private TMP_Text talkText;
+        
         
         // Method called by NPCController when creating DialogueBox (should be used for getting data from npc)
         public void SetUp([NotNull] List<string> dialogueLines)
         {
-            this._dialogueLines = dialogueLines ?? throw new ArgumentNullException(nameof(dialogueLines));
+            _dialogueLines = dialogueLines ?? throw new ArgumentNullException(nameof(dialogueLines));
         }
 
         public void Start()
         {
             var canvas = this.gameObject.transform.Find("Canvas"); // TODO: Get component?
             Button[] buttons = canvas.gameObject.GetComponentsInChildren<Button>();
-            talkText = canvas.gameObject.GetComponentInChildren<TMP_Text>();
-            Debug.Log(talkText.text);
+            _talkText = canvas.gameObject.GetComponentInChildren<TMP_Text>();
+            Debug.Log(_talkText.text);
             buttons[0].onClick.AddListener(Talk);
             buttons[2].onClick.AddListener(Exit);
         }
 
         private void Talk()
         {
-            // talkText.text =
-            int elemInd = _rnd.Next(_dialogueLines.Count);
-            Debug.Log(elemInd);
+            var elemInd = _rnd.Next(_dialogueLines.Count);
+            _talkText.text = _dialogueLines[elemInd];
         }
         
         private void Exit()

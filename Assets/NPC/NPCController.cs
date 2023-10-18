@@ -14,9 +14,9 @@ namespace NPC
         public GameObject player;
         public double interactiveDistance;
         public bool isBusy;
-        [SerializeField] public string prefabAddress = "Assets/NPC/DialogueBox.prefab";
-        [SerializeField] public List<string> dialogueLines;
         
+        [SerializeField] private string prefabAddress = "Assets/NPC/DialogueBox.prefab";
+        [SerializeField] private List<string> dialogueLines;
         private AsyncOperationHandle<GameObject> _dialogueHandle; 
         private bool _isInteractive;
     

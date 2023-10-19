@@ -14,13 +14,11 @@ public class WeaponRotation : MonoBehaviour {
     }
 
     private void Update() {
-        Vector2 mousePosition = Input.mousePosition;
-        Vector2 mouseScreenPosition = camera.ScreenToWorldPoint(mousePosition);
+        Vector2 mouseScreenPosition = camera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 position = _localTransform.position;
         
         // Rotate weapon
-        var direction = (mouseScreenPosition - position).normalized;
-        _localTransform.right = direction;
+        _localTransform.right =(mouseScreenPosition - position).normalized;
 
         // Flip weapon sprite
         var mousePosToPlayer = mouseScreenPosition - position;

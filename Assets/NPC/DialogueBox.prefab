@@ -277,6 +277,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2792484579711949636}
+  - component: {fileID: 2880940926413983056}
+  - component: {fileID: -7140219123859038204}
   m_Layer: 0
   m_Name: DialogueBox
   m_TagString: Untagged
@@ -300,6 +302,40 @@ Transform:
   - {fileID: 2008325275190715525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2880940926413983056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455599455409991940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9dfabe058843e3823a36cf2c0d9a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 0}
+  _talkText: {fileID: 0}
+  _dialogueLines:
+  - I drink boooze
+  - Gib me a smoke
+--- !u!114 &-7140219123859038204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455599455409991940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9dfabe058843e3823a36cf2c0d9a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 0}
+  _talkText: {fileID: 0}
+  _dialogueLines:
+  - I drink boooze
+  - Gib me a smoke
 --- !u!1 &1733994478894146687
 GameObject:
   m_ObjectHideFlags: 0

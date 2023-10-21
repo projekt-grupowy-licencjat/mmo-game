@@ -5,23 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void LoadOptions()
-    {
-        
-    }
-
     public void PlayGame()
     {
-        
+        SceneManager.LoadScene("NPCTest");
     }
 
     public void LogIn()
     {
-        
+        Debug.Log("Signing in");
     }
 
     public void Exit()
     {
-        
+        Debug.Log("QUIT");
+        // SceneManager.LoadScene("Quit");
+        Application.Quit();
     }
 }

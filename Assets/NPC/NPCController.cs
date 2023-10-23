@@ -81,11 +81,10 @@ namespace NPC
             if (_dialogueHandle.Status != AsyncOperationStatus.Succeeded) return;
             
             isBusy = true;
-            GameObject obj = _dialogueHandle.Result;
-            var dialogueBox = obj.AddComponent<DialogueBox>();
+            var dialogueHandler = Instantiate(_dialogueHandle.Result, transform);
+            var dialogueBox = dialogueHandler.AddComponent<DialogueBox>();
             dialogueBox.npc = this;
             dialogueBox.SetUp(dialogueLines);
-            Instantiate(obj, transform);
         }
         
         private double CalculateDistanceToPlayer()

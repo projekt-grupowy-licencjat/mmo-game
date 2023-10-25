@@ -6,15 +6,9 @@ namespace Inventory
 {
     public class Inventory : MonoBehaviour
     {
-        // Refers to the id in the database, eg. player or npc items
+        // Refers to the id in the database, eg. player or npc items - might be useless
         public long entityID;
 
         public List<Item.Item> items;
-        
-        // should load items from server
-        public void Awake()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

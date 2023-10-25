@@ -5,9 +5,9 @@ namespace Item
     public abstract class Item
     {
         // Item id in database
-        public long ItemID;
-        // should be loaded in constructor from the file string, TODO: so maybe string path here?
-        public Sprite sprite;
+        public long ItemID { get; set; }
+        // should be loaded in constructor from the file string
+        public string SpritePath { get; set; }
     }
 
     public abstract class Usable : Item

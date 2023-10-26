@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace Inventory
 {
-    public class Inventory : MonoBehaviour
+    [CreateAssetMenu]
+    public class Inventory : ScriptableObject
     {
         // Refers to the id in the database, eg. player or npc items - might be useless
         public long entityID;
-
-        public List<Item.Item> items;
+        
+        public List<Item.Item> Items;
     }
 }

@@ -9,8 +9,8 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 // TODO: Maybe part this big script to two separate scripts?
 namespace NPC
 {
-    public class NpcController : MonoBehaviour
-    {
+    public class NpcController : MonoBehaviour {
+        public MorseCode morseCodeController;
         public GameObject player;
         public double interactiveDistance;
         public bool isBusy;
@@ -84,6 +84,7 @@ namespace NPC
             var dialogueHandler = Instantiate(_dialogueHandle.Result, transform);
             var dialogueBox = dialogueHandler.AddComponent<DialogueBox>();
             dialogueBox.npc = this;
+            dialogueBox.morseCodeController = morseCodeController;
             dialogueBox.SetUp(dialogueLines);
         }
         

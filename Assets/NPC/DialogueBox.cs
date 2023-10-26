@@ -8,8 +8,8 @@ using Random = System.Random;
 
 namespace NPC
 {
-    public class DialogueBox : MonoBehaviour
-    {
+    public class DialogueBox : MonoBehaviour {
+        public MorseCode morseCodeController;
         public NpcController npc;
         public TMP_Text _talkText;
         public List<string> _dialogueLines;
@@ -36,11 +36,14 @@ namespace NPC
         {
             var elemInd = _rnd.Next(_dialogueLines.Count);
             _talkText.text = _dialogueLines[elemInd];
+            morseCodeController.StopMorseCode();
+            morseCodeController.PlayMorseCodeMessage(_talkText.text);
         }
         
         private void Exit()
         {
             npc.isBusy = false;
+            morseCodeController.StopMorseCode();
             Destroy(this.gameObject);
         }
     }

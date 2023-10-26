@@ -15,7 +15,9 @@ namespace Inventory
 
         private void Awake()
         {
+            Items = new List<Item.Item>();
             var bread = new Bread("Assets/Item/bread.png");
+            bread.LoadAsset();
             Items.Add(bread);
             Items.Add(bread);
             Items.Add(bread);

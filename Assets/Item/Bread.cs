@@ -12,7 +12,7 @@ namespace Item
 
         public override async void LoadAsset()
         {
-            var addressable = Addressables.LoadAssetAsync<GameObject>(this.SpritePath).Task;
+            var addressable = Addressables.LoadAssetAsync<Sprite>(this.SpritePath).Task;
             this.ItemAsset = await addressable;
         }
     }

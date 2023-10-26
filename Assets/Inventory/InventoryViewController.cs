@@ -6,7 +6,6 @@ namespace Inventory
 {
     public class InventoryController : MonoBehaviour
     {
-        [SerializeField] private Inventory inventory;
         [SerializeField] private GameObject inventoryViewAsset;
         private bool _show;
         private bool _isVisible;
@@ -23,7 +22,7 @@ namespace Inventory
             if (_show && !_isVisible)
             {
                 _inventoryView = Instantiate(inventoryViewAsset);
-                _inventoryView.GetComponent<InventoryView>().inventoryObject = inventory;
+
                 _isVisible = true;
                 _show = false;
             } 

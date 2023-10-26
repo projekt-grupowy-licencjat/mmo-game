@@ -4,7 +4,7 @@ namespace Item
 {
     public abstract class Item
     {
-        public GameObject ItemAsset { get; set; }
+        public Sprite ItemAsset { get; set; }
         public abstract void LoadAsset();
         protected string SpritePath { get; set; }
     }

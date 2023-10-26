@@ -4,10 +4,9 @@ namespace Item
 {
     public abstract class Item
     {
-        // Item id in database
-        public long ItemID { get; set; }
-        // should be loaded in constructor from the file string
-        public string SpritePath { get; set; }
+        public GameObject ItemAsset { get; set; }
+        public abstract void LoadAsset();
+        protected string SpritePath { get; set; }
     }
 
     public abstract class Usable : Item

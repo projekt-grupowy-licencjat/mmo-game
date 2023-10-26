@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Item;
 using UnityEngine;
 
 namespace Inventory
@@ -11,5 +12,14 @@ namespace Inventory
         public long entityID;
         
         public List<Item.Item> Items;
+
+        private void Awake()
+        {
+            var bread = new Bread("Assets/Item/bread.png");
+            Items.Add(bread);
+            Items.Add(bread);
+            Items.Add(bread);
+            Items.Add(bread);
+        }
     }
 }

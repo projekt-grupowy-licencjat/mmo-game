@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8a63249972dd88e5b6cb9fa14c647d0
+    m_Address: Assets/Inventory/InventoryView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 483945bc6f16bfa8e80ef51bad50f111, type: 2}
   m_SchemaSet:

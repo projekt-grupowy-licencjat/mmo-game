@@ -1,20 +1,27 @@
 using System;
 using System.Collections.Generic;
+using Item;
 using UnityEngine;
 
 namespace Inventory
 {
-    public class Inventory : MonoBehaviour
+    [CreateAssetMenu]
+    public class Inventory : ScriptableObject
     {
-        // Refers to the id in the database, eg. player or npc items
+        // Refers to the id in the database, eg. player or npc items - might be useless
         public long entityID;
-
-        public List<Item.Item> items;
         
-        // should load items from server
-        public void Awake()
+        public List<Item.Item> Items;
+
+        private void Awake()
         {
-            throw new NotImplementedException();
+            Items = new List<Item.Item>();
+            var bread = new Bread("Assets/Item/bread.png");
+            bread.LoadAsset();
+            Items.Add(bread);
+            Items.Add(bread);
+            Items.Add(bread);
+            Items.Add(bread);
         }
     }
 }

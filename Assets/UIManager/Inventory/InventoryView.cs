@@ -1,25 +1,24 @@
-using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Inventory
+namespace UIManager.Inventory
 {
     public class InventoryView : MonoBehaviour
     {
-        public Inventory inventoryObject;
+        public global::Inventory.Inventory inventoryObject;
         
-        private AsyncOperationHandle<Inventory> _handle;
+        private AsyncOperationHandle<global::Inventory.Inventory> _handle;
         private GameObject _itemListPanel;
         
         void Start()
         {
             _itemListPanel = transform.Find("Canvas/ItemList").gameObject;
-            _handle = Addressables.LoadAssetAsync<Inventory>("Assets/Inventory/PlayerInventory.asset");
+            _handle = Addressables.LoadAssetAsync<global::Inventory.Inventory>("Assets/Inventory/PlayerInventory.asset");
             _handle.Completed += HandleCompleted;
         }
         
-        private void HandleCompleted(AsyncOperationHandle<Inventory> operation)
+        private void HandleCompleted(AsyncOperationHandle<global::Inventory.Inventory> operation)
         {
             if (operation.Status == AsyncOperationStatus.Succeeded)
             {

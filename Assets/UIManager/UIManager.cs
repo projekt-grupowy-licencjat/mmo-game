@@ -11,14 +11,16 @@ namespace UIManager
         [SerializeField] private List<GameObject> staticElements;
         
         private List<Tuple<int, GameObject>> _activeElements;
+        private Canvas _canvas;
         
         private void Start()
         {
+            _canvas = GetComponent<Canvas>();
             _activeElements = new List<Tuple<int, GameObject>>();
 
             foreach (var element in staticElements)
             {
-                // TODO: spawn in children canvas here
+                Instantiate(element, transform, true);
             }
         }
 
@@ -29,8 +31,7 @@ namespace UIManager
                 if (Input.GetKeyDown(element.Keycode) && !element.Active)
                 {
                     element.Active = true;
-                    // TODO: Refactor it to be instantiated in canvas of this manager
-                    var newElement = Instantiate(element.Element);
+                    var newElement = Instantiate(element.Element, gameObject.transform, true);
                     _activeElements.Insert(0, Tuple.Create(index, newElement));
                 }
             }

@@ -10,17 +10,37 @@ namespace UIManager
         [SerializeField] private List<KeycodeElement> keycodeElements;
         [SerializeField] private List<GameObject> staticElements;
         
-        private List<Tuple<int, GameObject>> _activeElements;
-        private Canvas _canvas;
+        private List<ActiveElement> _activeElements;
+
+        public void MakeTop(ElementManager elementManager)
+        {
+            foreach (var (element, index) in _activeElements.Select((item, index) => (item, index)))
+            {
+                var panelChild = element.Element.transform.GetChild(0).gameObject;
+                if (panelChild.GetComponent<ElementManager>() == elementManager)
+                {
+                    var elementCanvas = element.Element.GetComponent<Canvas>();
+                    elementCanvas.sortingOrder = 1;
+                    
+                    var previousTopCanvas = _activeElements[0].Element.GetComponent<Canvas>();
+                    previousTopCanvas.sortingOrder = 0;
+                    
+                    _activeElements.RemoveAt(index);
+                    _activeElements.Insert(0, element);
+                    return;
+                }
+            }
+        }
         
         private void Start()
         {
-            _canvas = GetComponent<Canvas>();
-            _activeElements = new List<Tuple<int, GameObject>>();
+            _activeElements = new List<ActiveElement>();
 
             foreach (var element in staticElements)
             {
-                Instantiate(element, transform, true);
+                var staticElem = Instantiate(element, transform, true);
+                var elemPosition = staticElem.transform.position;
+                staticElem.transform.position = new Vector3(elemPosition.x, elemPosition.y, -9);
             }
         }
 
@@ -32,15 +52,18 @@ namespace UIManager
                 {
                     element.Active = true;
                     var newElement = Instantiate(element.Element, gameObject.transform, true);
-                    _activeElements.Insert(0, Tuple.Create(index, newElement));
+                    var panelChild = newElement.transform.GetChild(0).gameObject;
+                    var elemManager = panelChild.AddComponent<ElementManager>();
+                    
+                    _activeElements.Insert(0, new ActiveElement(index, newElement));
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Escape) && _activeElements.Count != 0)
             {
-                int keycodeIndex = _activeElements[0].Item1;
+                var keycodeIndex = _activeElements[0].KeycodeElementIndex;
                 keycodeElements[keycodeIndex].Active = false;
-                Destroy(_activeElements[0].Item2);
+                Destroy(_activeElements[0].Element);
                 _activeElements.RemoveAt(0);
             }
         }

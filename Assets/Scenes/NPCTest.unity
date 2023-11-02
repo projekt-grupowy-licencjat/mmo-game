@@ -807,6 +807,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -2550444305445338737, guid: c29cc00faa8deaa4eacc1f81dfe83933, type: 3}
+      propertyPath: staticElements.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2550444305445338737, guid: c29cc00faa8deaa4eacc1f81dfe83933, type: 3}
       propertyPath: keycodeElements.Array.size
       value: 2
       objectReference: {fileID: 0}

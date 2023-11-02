@@ -1,9 +1,11 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {   
+public class PlayerController : NetworkBehaviour {   
     [SerializeField] private float moveSpeed;
+    public NetworkVariable<Vector2> Position = new NetworkVariable<Vector2>();
+    
     private Rigidbody2D _rigidBody;
-
     private Vector2 _movement;
 
     private void Start() {

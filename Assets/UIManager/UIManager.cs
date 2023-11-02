@@ -39,8 +39,8 @@ namespace UIManager
             foreach (var element in staticElements)
             {
                 var staticElem = Instantiate(element, transform, true);
-                var elemPosition = staticElem.transform.position;
-                staticElem.transform.position = new Vector3(elemPosition.x, elemPosition.y, -9);
+                var elemCanvas = staticElem.GetComponent<Canvas>();
+                elemCanvas.sortingOrder = 2;
             }
         }
 

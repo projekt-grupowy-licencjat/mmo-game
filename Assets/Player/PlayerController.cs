@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {   
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Rigidbody2D rigidBody;
+    private Rigidbody2D _rigidBody;
 
     private Vector2 _movement;
 
     private void Start() {
-        rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
         
         // Limiting framerate for testing
         // QualitySettings.vSyncCount = 0;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     
     private void FixedUpdate() {
         _movement.Normalize();
-        rigidBody.MovePosition(rigidBody.position + _movement * (moveSpeed * Time.fixedDeltaTime));
+        _rigidBody.MovePosition(_rigidBody.position + _movement * (moveSpeed * Time.fixedDeltaTime));
     }
     
 }

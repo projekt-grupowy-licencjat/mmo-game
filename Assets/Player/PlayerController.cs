@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : NetworkBehaviour {   
     [SerializeField] private float moveSpeed;
-    public NetworkVariable<Vector2> Position = new NetworkVariable<Vector2>();
+    public NetworkVariable<Vector2> position = new NetworkVariable<Vector2>();
     
     private Rigidbody2D _rigidBody;
     private Vector2 _movement;
@@ -17,6 +17,7 @@ public class PlayerController : NetworkBehaviour {
     }
 
     private void Update() {
+        if (!IsOwner) return;
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
     }

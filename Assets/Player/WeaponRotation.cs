@@ -1,18 +1,21 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class WeaponRotation : MonoBehaviour {
+public class WeaponRotation : NetworkBehaviour {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private new Camera camera;
     private Transform _localTransform;
     [SerializeField] private float maxThreshold;
 
     private void Start() {
+        if (!IsOwner) return;
         _localTransform = transform;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         camera = Camera.main;
     }
 
     private void Update() {
+        if (!IsOwner) return;
         Vector2 mouseScreenPosition = camera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 position = _localTransform.parent.gameObject.transform.position;
         

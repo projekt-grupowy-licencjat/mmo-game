@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ParrelSync;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,15 +7,15 @@ public class CommandLineHelper : MonoBehaviour
 {
     private NetworkManager netManager;
 
-    void Start()
+    private void Start()
     {
         netManager = GetComponentInParent<NetworkManager>();
 
-        if (Application.isEditor) return;
+        // if (Application.isEditor) return;
 
         var args = GetCommandlineArgs();
 
-        if (args.TryGetValue("-mode", out string mode))
+        if (args.TryGetValue("-mode", out var mode))
         {
             switch (mode)
             {
@@ -25,11 +26,26 @@ public class CommandLineHelper : MonoBehaviour
                     netManager.StartHost();
                     break;
                 case "client":
-
                     netManager.StartClient();
                     break;
             }
         }
+        if (ClonesManager.IsClone()) {
+            var editorMode = ClonesManager.GetArgument();
+            switch (editorMode)
+            {
+                case "server":
+                    netManager.StartServer();
+                    break;
+                case "client":
+                    netManager.StartClient();
+                    break;
+            }
+        }
+        else {
+            netManager.StartHost();
+        }
+
     }
 
     private Dictionary<string, string> GetCommandlineArgs()

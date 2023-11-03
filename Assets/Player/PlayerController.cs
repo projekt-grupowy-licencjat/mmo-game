@@ -23,6 +23,7 @@ public class PlayerController : NetworkBehaviour {
     }
     
     private void FixedUpdate() {
+        if (!IsOwner) return;
         _movement.Normalize();
         _rigidBody.MovePosition(_rigidBody.position + _movement * (moveSpeed * Time.fixedDeltaTime));
     }

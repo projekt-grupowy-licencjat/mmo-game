@@ -5,47 +5,45 @@ using UnityEngine;
 
 public class CommandLineHelper : MonoBehaviour
 {
-    private NetworkManager netManager;
+    private NetworkManager _netManager;
 
     private void Start()
     {
-        netManager = GetComponentInParent<NetworkManager>();
+        _netManager = GetComponentInParent<NetworkManager>();
 
-        // if (Application.isEditor) return;
-
-        var args = GetCommandlineArgs();
-
-        if (args.TryGetValue("-mode", out var mode))
-        {
-            switch (mode)
-            {
-                case "server":
-                    netManager.StartServer();
-                    break;
-                case "host":
-                    netManager.StartHost();
-                    break;
-                case "client":
-                    netManager.StartClient();
-                    break;
+        if (Application.isEditor) {
+            if (ClonesManager.IsClone()) {
+                var editorMode = ClonesManager.GetArgument();
+                switch (editorMode)
+                {
+                    case "server":
+                        _netManager.StartServer();
+                        break;
+                    case "client":
+                        _netManager.StartClient();
+                        break;
+                }
             }
-        }
-        if (ClonesManager.IsClone()) {
-            var editorMode = ClonesManager.GetArgument();
-            switch (editorMode)
-            {
-                case "server":
-                    netManager.StartServer();
-                    break;
-                case "client":
-                    netManager.StartClient();
-                    break;
+            else {
+                _netManager.StartHost();
             }
         }
         else {
-            netManager.StartHost();
+            var args = GetCommandlineArgs();
+            if (!args.TryGetValue("-mode", out var mode)) return;
+            switch (mode)
+            {
+                case "server":
+                    _netManager.StartServer();
+                    break;
+                case "host":
+                    _netManager.StartHost();
+                    break;
+                case "client":
+                    _netManager.StartClient();
+                    break;
+            }
         }
-
     }
 
     private Dictionary<string, string> GetCommandlineArgs()

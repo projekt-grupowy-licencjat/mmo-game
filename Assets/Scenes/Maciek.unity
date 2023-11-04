@@ -7267,9 +7267,9 @@ MonoBehaviour:
     Port: 7777
     ServerListenAddress: 127.0.0.1
   DebugSimulator:
-    PacketDelayMS: 0
-    PacketJitterMS: 0
-    PacketDropRate: 0
+    PacketDelayMS: 150
+    PacketJitterMS: 20
+    PacketDropRate: 20
 --- !u!114 &1052846847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7288,7 +7288,7 @@ MonoBehaviour:
     PlayerPrefab: {fileID: 1637684998583128433, guid: cbd8eea7cc26fd545a01ac863fd4a278, type: 3}
     Prefabs:
       NetworkPrefabsLists: []
-    TickRate: 30
+    TickRate: 45
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
     ConnectionData: 
@@ -7334,7 +7334,7 @@ GameObject:
   - component: {fileID: 1146446727}
   m_Layer: 0
   m_Name: CameraPositon
-  m_TagString: Untagged
+  m_TagString: CameraTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

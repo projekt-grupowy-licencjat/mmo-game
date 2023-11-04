@@ -812,7 +812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2550444305445338737, guid: c29cc00faa8deaa4eacc1f81dfe83933, type: 3}
       propertyPath: keycodeElements.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2550444305445338737, guid: c29cc00faa8deaa4eacc1f81dfe83933, type: 3}
       propertyPath: keycodeElements.Array.data[1].Element

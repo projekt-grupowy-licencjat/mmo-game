@@ -74,3 +74,6 @@ crashlytics-build.properties
 
 # Windows shit
 .vsconfig
+
+# Crash blob shit
+mono_crash*

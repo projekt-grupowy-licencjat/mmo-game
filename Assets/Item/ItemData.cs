@@ -6,6 +6,7 @@ namespace Item
     public abstract class ItemData : ScriptableObject
     {
         public string itemName;
+        public string itemDescription;
         public Sprite itemSprite;
     }
 

@@ -1,13 +1,15 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {   
+public class PlayerController : NetworkBehaviour {   
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Rigidbody2D rigidBody;
-
+    public NetworkVariable<Vector2> position = new NetworkVariable<Vector2>();
+    
+    private Rigidbody2D _rigidBody;
     private Vector2 _movement;
 
     private void Start() {
-        rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
         
         // Limiting framerate for testing
         // QualitySettings.vSyncCount = 0;
@@ -15,13 +17,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        if (!IsOwner) return;
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
     }
     
     private void FixedUpdate() {
+        if (!IsOwner) return;
         _movement.Normalize();
-        rigidBody.MovePosition(rigidBody.position + _movement * (moveSpeed * Time.fixedDeltaTime));
+        _rigidBody.MovePosition(_rigidBody.position + _movement * (moveSpeed * Time.fixedDeltaTime));
     }
     
 }

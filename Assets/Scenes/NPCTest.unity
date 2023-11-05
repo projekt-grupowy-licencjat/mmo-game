@@ -485,6 +485,10 @@ MonoBehaviour:
   player: {fileID: 624297344}
   interactiveDistance: 5
   isBusy: 0
+  prefabAddress: Assets/NPC/DialogueBox.prefab
+  dialogueLines:
+  - I drink boooze
+  - Gib me a smoke
 --- !u!1 &624297344
 GameObject:
   m_ObjectHideFlags: 0

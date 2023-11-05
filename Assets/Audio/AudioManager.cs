@@ -45,6 +45,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("Sound: " + clipname + " does NOT exist!");
             return;
         }
+        // Debug.Log("Sound: " + clipname + " found!");
         s.source.Play();
     }
 

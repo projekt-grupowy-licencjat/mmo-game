@@ -11,17 +11,17 @@ public class AudioOptionsManager : MonoBehaviour
 
     public void OnMusicSliderValueChange(float value)
     {
-        musicVolume = value; 
+        musicVolume = value == 0 ? 0.0001f : value / 100;
         
-        musicSliderText.text = ((int)(value * 100)).ToString();
+        musicSliderText.text = ((int)(value)).ToString();
         AudioManager.Instance.UpdateMixerVolume();
     }
 
     public void OnSoundEffectsSliderValueChange(float value)
     {
-        soundEffectsVolume = value;
-
-        soundEffectsSliderText.text = ((int)(value * 100)).ToString();
+        soundEffectsVolume = value == 0 ? 0.0001f : value / 100;
+        
+        soundEffectsSliderText.text = ((int)(value)).ToString();
         AudioManager.Instance.UpdateMixerVolume();
     }
 }

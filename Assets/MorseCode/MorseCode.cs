@@ -2,12 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
- 
+
 public class MorseCode : MonoBehaviour {
     [SerializeField] private string morseMessage;
     private AudioSource _audioSource;
-    private AudioClip _dotSound;
-    private AudioClip _dashSound;
+    [SerializeField] private AudioClip dotSound;
+    [SerializeField] private AudioClip dashSound;
     private float _dotSoundLength;
     private float _dashSoundLength;
     private const float SpaceDelay = 0.05f;
@@ -28,11 +28,9 @@ public class MorseCode : MonoBehaviour {
     // Use this for initialization
     private void Start () {
         _audioSource = gameObject.GetComponent<AudioSource>();
-        _dotSound = Resources.Load<AudioClip>("Sounds/dot");
-        _dashSound = Resources.Load<AudioClip>("Sounds/dash");
-        _dotSoundLength = _dotSound.length;
-        _dashSoundLength = _dashSound.length;
-        PlayMorseCodeMessage(morseMessage);
+        _dotSoundLength = dotSound.length;
+        _dashSoundLength = dashSound.length;
+        if (morseMessage.Length > 0) PlayMorseCodeMessage(morseMessage);
     }
     
     public void PlayMorseCodeMessage(string message) {
@@ -56,7 +54,7 @@ public class MorseCode : MonoBehaviour {
                 var letterCode = _alphabet[letter];
                 foreach(var bit in letterCode) {
                     // Dot or Dash?
-                    var sound = bit == '-' ? _dashSound : _dotSound;
+                    var sound = bit == '-' ? dashSound : dotSound;
                     var soundLength = bit == '-' ? _dashSoundLength : _dotSoundLength;
                    
                     // Play the audio clip and wait for it to end before playing the next one.

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Bread
-  m_EditorClassIdentifier: Assembly-CSharp:Item:HealingItem
-  itemName: 
-  itemDescription: 
-  itemSprite: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: c7f16186323844028408d1acd160c5d1, type: 3}
+  m_Name: New Healing Item
+  m_EditorClassIdentifier: 
+  itemName: Bread
+  itemDescription: sadsd
+  itemSprite: {fileID: 21300000, guid: e93dea9afee8cfdcfa72075460374a24, type: 3}
   healValue: 0

@@ -15,15 +15,4 @@ namespace Item
         // TODO: Add arguments here
         public abstract void Use();
     }
-    
-    [CreateAssetMenu(menuName = "Items/HealingItem")]
-    public class HealingItem : Usable
-    {
-        [SerializeField] private int healValue;
-        
-        public override void Use()
-        {
-            Debug.Log("Item used");
-        }
-    }
 }

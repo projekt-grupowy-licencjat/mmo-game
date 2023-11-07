@@ -5,14 +5,16 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField] private float moveSpeed;
     public NetworkVariable<Vector2> position = new NetworkVariable<Vector2>();
     private Camera _camera;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
     
     private Rigidbody2D _rigidBody;
     private Vector2 _movement;
 
     private void Start() {
         _rigidBody = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         _camera = Camera.main;
         
         // Limiting framerate for testing
@@ -26,7 +28,12 @@ public class PlayerController : NetworkBehaviour {
         _movement.y = Input.GetAxisRaw("Vertical");
         Vector2 mouseScreenPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         var mousePosToPlayer = mouseScreenPosition - (Vector2)transform.position;
-        spriteRenderer.flipX = mousePosToPlayer.x < 0;
+        _spriteRenderer.flipX = mousePosToPlayer.x < 0;
+        
+        // Animator
+        _animator.SetBool("IsRunning", _movement != Vector2.zero);
+        _animator.SetBool("Reversed", _movement.x != 0f && _movement.x * mousePosToPlayer.x < 0f);
+        
     }
     
     private void FixedUpdate() {

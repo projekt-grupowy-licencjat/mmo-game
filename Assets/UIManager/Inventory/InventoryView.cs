@@ -1,5 +1,4 @@
-using System;
-using Network;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace UIManager.Inventory
@@ -10,7 +9,7 @@ namespace UIManager.Inventory
 
         private void Start()
         {
-            inventory = LocalPlayerSingleton.Instance.LocalPlayer.GetComponent<global::Inventory.Inventory>();
+            inventory = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<global::Inventory.Inventory>();
         }
     }
 }

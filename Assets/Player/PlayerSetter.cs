@@ -1,10 +1,12 @@
+using Network;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerCameraSetter : NetworkBehaviour {
+public class PlayerSetter : NetworkBehaviour {
     public override void OnNetworkSpawn() {
         if (IsOwner) {
             GameObject.FindWithTag("CameraTarget").GetComponent<CameraTarget>().player = transform;
+            LocalPlayerSingleton.Instance.LocalPlayer = gameObject;
         }
     }
 }

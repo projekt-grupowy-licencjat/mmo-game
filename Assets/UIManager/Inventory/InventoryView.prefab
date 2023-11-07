@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7999374160501891199}
   - component: {fileID: 4687464080003278671}
   - component: {fileID: 5692820961821325794}
-  - component: {fileID: 7607305429187309331}
+  - component: {fileID: 2211716216032714359}
   m_Layer: 0
   m_Name: InventoryView
   m_TagString: Untagged
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7607305429187309331
+--- !u!114 &2211716216032714359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

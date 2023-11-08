@@ -10,6 +10,8 @@ public class PlayerController : NetworkBehaviour {
     
     private Rigidbody2D _rigidBody;
     private Vector2 _movement;
+    private static readonly int IsRunning = Animator.StringToHash("IsRunning");
+    private static readonly int Reversed = Animator.StringToHash("Reversed");
 
     private void Start() {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -31,8 +33,8 @@ public class PlayerController : NetworkBehaviour {
         _spriteRenderer.flipX = mousePosToPlayer.x < 0;
         
         // Animator
-        _animator.SetBool("IsRunning", _movement != Vector2.zero);
-        _animator.SetBool("Reversed", _movement.x != 0f && _movement.x * mousePosToPlayer.x < 0f);
+        _animator.SetBool(IsRunning, _movement != Vector2.zero);
+        _animator.SetBool(Reversed, _movement.x != 0f && _movement.x * mousePosToPlayer.x < 0f);
         
     }
     

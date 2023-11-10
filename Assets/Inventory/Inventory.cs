@@ -7,6 +7,11 @@ namespace Inventory
 {
     public class Inventory : NetworkBehaviour
     {
-        public List<ItemData> items;
+        [SerializeField] private List<ItemData> items;
+
+        public void AddItem(ItemData item)
+        {
+            items.Add(item);
+        }
     }
 }

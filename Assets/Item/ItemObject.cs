@@ -1,5 +1,6 @@
 using System;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 namespace Item
@@ -11,11 +12,12 @@ namespace Item
     {
         public ItemData data;
         private SpriteRenderer _spriteRenderer;
-
+        
         private void Start()
         {
             _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
             _spriteRenderer.sprite = data.itemSprite;
+            gameObject.AddComponent<NetworkObject>();
         }
     }
 }

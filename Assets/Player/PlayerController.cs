@@ -28,9 +28,13 @@ public class PlayerController : NetworkBehaviour {
         if (!IsOwner) return;
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
+        
+        // Flip player
         Vector2 mouseScreenPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         var mousePosToPlayer = mouseScreenPosition - (Vector2)transform.position;
-        _spriteRenderer.flipX = mousePosToPlayer.x < 0;
+        var transformLocalScale = transform.localScale;
+        transformLocalScale.x = mousePosToPlayer.x < 0 ? -1 : 1;
+        transform.localScale = transformLocalScale;
         
         // Animator
         _animator.SetBool(IsRunning, _movement != Vector2.zero);

@@ -42,5 +42,7 @@ public class WeaponRotation : NetworkBehaviour {
         if (mousePosToPlayer.x < 0) transformLocalPosition.x = position.x - maxThreshold;
         else transformLocalPosition.x = position.x + maxThreshold;
         transform.position = transformLocalPosition;
+        
     }
+
 }

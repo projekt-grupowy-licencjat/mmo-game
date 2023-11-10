@@ -18,6 +18,7 @@ namespace Item
     
     public abstract class Weapon : ItemData {
         // TODO possible additional fields/methods
-        public abstract void Attack();
+        public abstract void Attack(Transform barrel);
+        public abstract Transform Setup(GameObject parent);
     }
 }

@@ -129,7 +129,7 @@ MonoBehaviour:
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!1 &1637684998583128433
 GameObject:
@@ -315,7 +315,7 @@ MonoBehaviour:
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &7847275226171604295
 MonoBehaviour:
@@ -353,7 +353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f086da0036243ee952850bb77b91e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
 --- !u!95 &1795326760508692493
 Animator:
   serializedVersion: 5

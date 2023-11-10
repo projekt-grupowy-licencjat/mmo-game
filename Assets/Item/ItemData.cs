@@ -15,4 +15,9 @@ namespace Item
         // TODO: Add arguments here
         public abstract void Use();
     }
+    
+    public abstract class Weapon : ItemData {
+        // TODO possible additional fields/methods
+        public abstract void Attack();
+    }
 }

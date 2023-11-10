@@ -135,7 +135,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
-  itemPanel: {fileID: 7348326471325735223, guid: 3fdba22fcb49fc866a3cafdb3956d1ea, type: 3}
+  itemPanelPrefab: {fileID: 6616143322614790687, guid: 3fdba22fcb49fc866a3cafdb3956d1ea, type: 3}
   content: {fileID: 1314707689103813957}
 --- !u!1 &3431192531080745963
 GameObject:

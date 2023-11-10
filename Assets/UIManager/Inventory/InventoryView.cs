@@ -7,7 +7,7 @@ namespace UIManager.Inventory
     {
         public global::Inventory.Inventory inventory;
         // Tells the inventory view to which prefab map the items
-        public GameObject itemPanel;
+        public GameObject itemPanelPrefab;
         public GameObject content;
         
         private void Start()
@@ -16,7 +16,9 @@ namespace UIManager.Inventory
             
             foreach (var item in inventory.Items)
             {
-                
+                var itemPanel = Instantiate(itemPanelPrefab, content.transform, false);
+                var inventoryElement = itemPanel.GetComponent<InventoryElement>();
+                inventoryElement.itemData = item;
             }
         }
     }

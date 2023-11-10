@@ -4,7 +4,7 @@ public class CameraTarget : MonoBehaviour {
     [SerializeField] private new Camera camera;
     [SerializeField] public Transform player;
     [SerializeField] private float threshold;
-
+    
     private void Update() {
         var mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
         var position = player.position;

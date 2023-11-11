@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2507762502885118646}
   - component: {fileID: 3335105699695174270}
-  - component: {fileID: 9103719787622912823}
+  - component: {fileID: -9033160405813066254}
   - component: {fileID: 2355797823881157145}
   - component: {fileID: 7983685535934068151}
   m_Layer: 0
@@ -87,8 +87,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &9103719787622912823
-CapsuleCollider2D:
+--- !u!58 &-9033160405813066254
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,8 +120,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!50 &2355797823881157145
 Rigidbody2D:
   serializedVersion: 4
@@ -161,5 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a543384ce74657409075a8fd2e46aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
   lifeTime: 3

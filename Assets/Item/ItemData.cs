@@ -15,8 +15,12 @@ namespace Item
         // TODO: Add arguments here
         public abstract void Use();
     }
+
+    public abstract class Wearable : ItemData {
+        
+    }
     
-    public abstract class Weapon : ItemData {
+    public abstract class Weapon : Wearable {
         // TODO possible additional fields/methods
         public abstract void Attack(Transform barrel);
         public abstract Transform Setup(GameObject parent);

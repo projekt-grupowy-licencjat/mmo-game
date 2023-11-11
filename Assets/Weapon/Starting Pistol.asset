@@ -17,4 +17,5 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: ff1918c3f1dccc0478a7a91127dca44b, type: 3}
   bulletPrefab: {fileID: 40667721470021036, guid: 6838323be16bf0c41b3f580092b118e7, type: 3}
   barrelPos: {x: 0.9, y: 0.37}
-  fireRate: 0.307
+  fireRate: 0.1
+  automatic: 1

@@ -1,4 +1,5 @@
 using Item;
+using Unity.Netcode;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Weapons/Firearm")]
@@ -19,11 +20,13 @@ public class Firearm : Weapon {
     
     public override void Attack(Transform barrel) {
         if (Input.GetMouseButton(0) && _fireTimer <= 0f && automatic) {
-            Instantiate(bulletPrefab, barrel.position, barrel.rotation);
+            var go = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
+            go.GetComponent<NetworkObject>().Spawn();
             _fireTimer = fireRate;
         }
         else if (Input.GetMouseButtonDown(0) && _fireTimer <= 0f && !automatic) {
-            Instantiate(bulletPrefab, barrel.position, barrel.rotation);
+            var go = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
+            go.GetComponent<NetworkObject>().Spawn();
             _fireTimer = fireRate;
         }
         else _fireTimer -= Time.deltaTime;

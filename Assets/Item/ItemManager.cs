@@ -40,7 +40,8 @@ namespace Item
             if (result.Item1 && Input.GetKeyDown("e"))
             {
                 localInventory.AddItem(result.Item2.data);
-                Destroy(gameObject);
+                sceneItems.Remove(result.Item2.gameObject);
+                Destroy(result.Item2.gameObject);
             }
         }
         

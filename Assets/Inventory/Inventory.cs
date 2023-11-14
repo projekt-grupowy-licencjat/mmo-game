@@ -19,5 +19,10 @@ namespace Inventory
         {
             Items.Add(item);
         }
+
+        public bool RemoveItem(ItemData item)
+        {
+            return Items.Remove(item);
+        }
     }
 }

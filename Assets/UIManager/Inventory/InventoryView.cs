@@ -19,6 +19,7 @@ namespace UIManager.Inventory
                 var itemPanel = Instantiate(itemPanelPrefab, content.transform, false);
                 var inventoryElement = itemPanel.GetComponent<InventoryElement>();
                 inventoryElement.itemData = item;
+                inventoryElement.playerInventory = inventory;
             }
         }
     }

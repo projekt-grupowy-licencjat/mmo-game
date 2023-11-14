@@ -7,6 +7,8 @@ namespace UIManager
 {
     public class UIManager : MonoBehaviour
     {
+        public static UIManager Instance { get; private set; }
+        
         [SerializeField] private List<KeycodeElement> keycodeElements;
         [SerializeField] private List<GameObject> staticElements;
         
@@ -34,6 +36,8 @@ namespace UIManager
         
         private void Start()
         {
+            if (!Instance) Instance = this;
+            
             _activeElements = new List<ActiveElement>();
 
             foreach (var element in staticElements)

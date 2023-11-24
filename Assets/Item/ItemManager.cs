@@ -12,17 +12,11 @@ namespace Item
         public Inventory.Inventory localInventory;
         public static ItemManager Instance { get; private set; }
         
-        private NetworkList<int> networkItemIds;
-
-        [SerializeField] private List<GameObject> sceneItems;
         [SerializeField] private double activePlayerDistance = 5f;
         [SerializeField] private float secondsInterval = 1f;
-        [SerializeField] private List<ItemData> startItems;
-
-        private void Awake()
-        {
-            networkItemIds = new();
-        }
+        [SerializeField] private List<ItemData> startItems; // TODO: ONLY FOR DEBUG
+        [SerializeField] private List<GameObject> sceneItems;
+        
 
         private void Start()
         {
@@ -30,16 +24,12 @@ namespace Item
             {
                 Instance = this;
             }
-
-            // if (IsServer)
-            // {
-            //     foreach (var data in startItems)
-            //     {
-            //         CreateItem(data);
-            //     }
-            // }
             
-            // networkItemIds.OnValueChanged
+            // TODO: DEBUG ONLY
+            foreach (var data in startItems)
+            {
+                CreateItem(data);
+            }
 
             StartCoroutine(LoadLocalInventory(secondsInterval));
         }
@@ -54,16 +44,10 @@ namespace Item
                 HandlePickup(result.Item2);
             }
         }
-
-        private new void OnDestroy()
-        {
-            networkItemIds.Dispose();
-        }
         
         private void HandlePickup(ItemObject item)
         {
             var o = item.gameObject;
-            int index = sceneItems.FindIndex(g => g == o);
             localInventory.AddItem(item.data);
             sceneItems.Remove(o);
             Destroy(o);

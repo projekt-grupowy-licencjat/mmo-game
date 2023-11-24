@@ -3,23 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Item
 {
     public class ItemManager : NetworkBehaviour
     {
         public Inventory.Inventory localInventory;
-        public static ItemManager Instance;
+        public static ItemManager Instance { get; private set; }
         
-        // TODO: Network variable
+        private NetworkList<int> networkItemIds;
+
         [SerializeField] private List<GameObject> sceneItems;
         [SerializeField] private double activePlayerDistance = 5f;
         [SerializeField] private float secondsInterval = 1f;
         [SerializeField] private List<ItemData> startItems;
-        
+
+        private void Awake()
+        {
+            networkItemIds = new();
+        }
+
         private void Start()
         {
             if (!Instance)
@@ -27,10 +31,15 @@ namespace Item
                 Instance = this;
             }
 
-            foreach (var data in startItems)
-            {
-                CreateItem(data);
-            }
+            // if (IsServer)
+            // {
+            //     foreach (var data in startItems)
+            //     {
+            //         CreateItem(data);
+            //     }
+            // }
+            
+            // networkItemIds.OnValueChanged
 
             StartCoroutine(LoadLocalInventory(secondsInterval));
         }
@@ -46,6 +55,11 @@ namespace Item
             }
         }
 
+        private new void OnDestroy()
+        {
+            networkItemIds.Dispose();
+        }
+        
         private void HandlePickup(ItemObject item)
         {
             var o = item.gameObject;

@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Item
 {
@@ -12,10 +13,12 @@ namespace Item
     {
         public Inventory.Inventory localInventory;
         public static ItemManager Instance;
-        [SerializeField] private List<ItemData> newItems;
-        [SerializeField] private List<GameObject> sceneItems; // TODO: Network Variable?
+        
+        // TODO: Network variable
+        [SerializeField] private List<GameObject> sceneItems;
         [SerializeField] private double activePlayerDistance = 5f;
         [SerializeField] private float secondsInterval = 1f;
+        [SerializeField] private List<ItemData> startItems;
         
         private void Start()
         {
@@ -24,7 +27,7 @@ namespace Item
                 Instance = this;
             }
 
-            foreach (var data in newItems)
+            foreach (var data in startItems)
             {
                 CreateItem(data);
             }
@@ -39,10 +42,17 @@ namespace Item
             
             if (result.Item1 && Input.GetKeyDown("e"))
             {
-                localInventory.AddItem(result.Item2.data);
-                sceneItems.Remove(result.Item2.gameObject);
-                Destroy(result.Item2.gameObject);
+                HandlePickup(result.Item2);
             }
+        }
+
+        private void HandlePickup(ItemObject item)
+        {
+            var o = item.gameObject;
+            int index = sceneItems.FindIndex(g => g == o);
+            localInventory.AddItem(item.data);
+            sceneItems.Remove(o);
+            Destroy(o);
         }
         
         public void CreateItem(ItemData itemData)

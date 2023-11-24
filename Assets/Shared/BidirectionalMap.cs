@@ -15,8 +15,7 @@ namespace Shared
 
         public bool RemoveByFirst(TKey key)
         {
-            TValue second;
-            if (forward.TryGetValue(key, out second))
+            if (forward.TryGetValue(key, out var second))
             {
                 forward.Remove(key);
                 reverse.Remove(second);
@@ -28,8 +27,7 @@ namespace Shared
 
         public bool RemoveBySecond(TValue value)
         {
-            TKey first;
-            if (reverse.TryGetValue(value, out first))
+            if (reverse.TryGetValue(value, out var first))
             {
                 reverse.Remove(value);
                 forward.Remove(first);

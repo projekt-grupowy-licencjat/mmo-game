@@ -12,12 +12,15 @@ namespace Item
     {
         public ItemData data;
         private SpriteRenderer _spriteRenderer;
-        
-        private void Start()
+
+        public void Init(ItemData newData)
         {
-            _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+            if (data) return;
+            
+            data = newData;
+            if (!gameObject.GetComponent<SpriteRenderer>())
+                _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
             _spriteRenderer.sprite = data.itemSprite;
-            gameObject.AddComponent<NetworkObject>();
         }
     }
 }

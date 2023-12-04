@@ -10,13 +10,11 @@ namespace Item
     public class ItemManager : NetworkBehaviour
     {
         public Inventory.Inventory localInventory;
+        public GameObject genericItemPrefab;
         public static ItemManager Instance { get; private set; }
         
         [SerializeField] private double activePlayerDistance = 5f;
         [SerializeField] private float secondsInterval = 1f;
-        [SerializeField] private List<ItemData> startItems; // TODO: ONLY FOR DEBUG
-        [SerializeField] private List<GameObject> sceneItems;
-        
 
         private void Start()
         {
@@ -25,18 +23,12 @@ namespace Item
                 Instance = this;
             }
             
-            // TODO: DEBUG ONLY
-            foreach (var data in startItems)
-            {
-                CreateItem(data);
-            }
-
             StartCoroutine(LoadLocalInventory(secondsInterval));
         }
 
         private void Update()
         {
-            if (sceneItems.Count == 0) return;
+            if (transform.childCount == 0) return;
             var result = CalculateItemClosestToPlayer();
             
             if (result.Item1 && Input.GetKeyDown("e"))
@@ -49,32 +41,91 @@ namespace Item
         {
             var o = item.gameObject;
             localInventory.AddItem(item.data);
-            sceneItems.Remove(o);
-            Destroy(o);
+            if (IsServer) o.GetComponent<NetworkObject>().Despawn();
+            else HandlePickupServerRpc(o.GetComponent<NetworkObject>());
         }
+        
+        [ServerRpc(RequireOwnership = false)]
+        private void HandlePickupServerRpc(NetworkObjectReference netRef)
+        {
+            NetworkObject networkObject;
+            bool result = netRef.TryGet(out networkObject, NetworkManager.Singleton);
+            if (!result)
+            {
+                Debug.LogError("Couldn't find item.");
+                return;
+            }
+            networkObject.Despawn();
+        }
+        
         
         public void CreateItem(ItemData itemData)
         {
-            var itemGameObject = new GameObject
-            {
-                transform =
-                {
-                    parent = transform
-                }
-            };
-            var itemObject = itemGameObject.AddComponent<ItemObject>();
-            itemObject.data = itemData;
-            
-            sceneItems.Add(itemGameObject);
+            CreateItemServerRpc(itemData.itemName);
+        }
+        
+        public void CreateItem(ItemData itemData, float x, float y)
+        {
+            CreateItemServerRpc(itemData.itemName, x, y);
         }
 
+        [ClientRpc]
+        public void SetPropertyClientRpc(string itemName, NetworkObjectReference netRef)
+        {
+            NetworkObject networkObject;
+            bool result = netRef.TryGet(out networkObject, NetworkManager.Singleton);
+            if (!result)
+            {
+                Debug.LogError("Couldn't find item.");
+                return;
+            }
+
+            var itemObject = networkObject.gameObject.GetComponent<ItemObject>();
+            var data = ItemCache.Instance.itemScriptableObjects[itemName];
+            itemObject.Init(data);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void CreateItemServerRpc(string itemName)
+        {
+            var data = ItemCache.Instance.itemScriptableObjects[itemName];
+            
+            var itemGameObject = Instantiate(genericItemPrefab);
+            var networkObject = itemGameObject.GetComponent<NetworkObject>();
+            networkObject.Spawn();
+            networkObject.TrySetParent(transform);
+            var itemObject = itemGameObject.GetComponent<ItemObject>();
+            
+            if (IsServer) itemObject.Init(data);
+            SetPropertyClientRpc(data.itemName, networkObject);
+        }
+        
+        [ServerRpc(RequireOwnership = false)]
+        private void CreateItemServerRpc(string itemName, float x, float y)
+        {
+            var data = ItemCache.Instance.itemScriptableObjects[itemName];
+            
+            var itemGameObject = Instantiate(genericItemPrefab);
+            var networkObject = itemGameObject.GetComponent<NetworkObject>();
+            networkObject.Spawn();
+            networkObject.TrySetParent(transform);
+            var itemObject = itemGameObject.GetComponent<ItemObject>();
+            if (IsServer) itemObject.Init(data);
+            
+            networkObject.transform.position = new Vector2(x, y);
+            
+            SetPropertyClientRpc(data.itemName, networkObject);
+        }
+        
         private (bool, ItemObject) CalculateItemClosestToPlayer()
         {
-            double currentMin = CalculateDistance(sceneItems[0]);
-            GameObject currentGameObject = sceneItems[0];
-            
-            foreach (var item in sceneItems.Skip(1))
+            double currentMin = CalculateDistance(transform.GetChild(0).gameObject);
+            GameObject currentGameObject = transform.GetChild(0).gameObject;
+
+            foreach (var itemTransform in gameObject.GetComponentsInChildren<Transform>().Skip(1))
             {
+                var item = itemTransform.gameObject;
+                
                 var result = CalculateDistance(item);
 
                 if (result < currentMin)

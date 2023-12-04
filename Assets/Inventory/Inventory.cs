@@ -8,7 +8,7 @@ namespace Inventory
 {
     public class Inventory : NetworkBehaviour
     {
-        public List<ItemData> Items { get; private set; }
+        public List<ItemData> Items;
 
         private void Start()
         {

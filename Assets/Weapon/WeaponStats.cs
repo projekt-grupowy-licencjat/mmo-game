@@ -27,10 +27,11 @@ public class WeaponStats : NetworkBehaviour {
             AttackServerRpc();
         }
     }
-
-    // TODO figure out client shooting
+    
     [ServerRpc(RequireOwnership = false)]
     private void AttackServerRpc() {
+        // TODO Fix not being able to shoot as client when host is paused
+        if (IsHost && UIManager.UIManager.Instance.isPaused) return;
         weaponData.Attack(_attackPoint.transform);
     }
 

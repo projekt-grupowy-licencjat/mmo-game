@@ -9,7 +9,15 @@ public class Bullet : NetworkBehaviour {
 
     private void Start() {
         _rb = GetComponent<Rigidbody2D>();
-        Destroy(gameObject, lifeTime);
+        if (IsServer)
+        {
+            Destroy(gameObject, lifeTime);
+        }
+        else
+        {
+            DestroyBecauseLifetimeServerRPC();
+        }
+        
     }
 
     private void FixedUpdate() {
@@ -18,5 +26,18 @@ public class Bullet : NetworkBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (IsHost) Destroy(gameObject);
+        else DestroyBecauseTriggerServerRPC();
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void DestroyBecauseTriggerServerRPC()
+    {
+        gameObject.GetComponent<NetworkObject>().Despawn();
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void DestroyBecauseLifetimeServerRPC()
+    {
+        Destroy(gameObject, lifeTime);
     }
 }

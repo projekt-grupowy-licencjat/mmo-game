@@ -1,3 +1,4 @@
+using System;
 using Item;
 using Unity.Netcode;
 using UnityEngine;
@@ -15,14 +16,29 @@ public class WeaponStats : NetworkBehaviour {
         _barrel = weaponData.Setup(gameObject);
     }
 
-    private void Update() {
-        if (IsOwner) weaponData.Attack(_barrel);
+    private void Update()
+    {
+        if (!IsOwner) return;
+        if (Input.GetMouseButton(0))
+        {
+            if (IsServer)
+                AttackClientRpc();
+            else
+                AttackServerRpc();
+        }
         // if (IsOwner) AttackServerRpc();
     }
 
     // TODO figure out client shooting
-    // [ServerRpc]
-    // private void AttackServerRpc() {
-    //     weaponData.Attack(_barrel);
-    // }
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackServerRpc() {
+        weaponData.Attack(transform);
+        // AttackClientRpc();
+    }
+    
+    [ClientRpc]
+    private void AttackClientRpc()
+    {
+        weaponData.Attack(transform);
+    }
 }

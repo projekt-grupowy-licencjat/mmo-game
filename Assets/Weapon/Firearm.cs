@@ -19,12 +19,12 @@ public class Firearm : Weapon {
     }
     
     public override void Attack(Transform barrel) {
-        if (Input.GetMouseButton(0) && _fireTimer <= 0f && automatic) {
+        if (_fireTimer <= 0f && automatic) {
             var go = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
             go.GetComponent<NetworkObject>().Spawn();
             _fireTimer = fireRate;
         }
-        else if (Input.GetMouseButtonDown(0) && _fireTimer <= 0f && !automatic) {
+        else if (_fireTimer <= 0f && !automatic) {
             var go = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
             go.GetComponent<NetworkObject>().Spawn();
             _fireTimer = fireRate;

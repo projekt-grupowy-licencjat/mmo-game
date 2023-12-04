@@ -1,4 +1,3 @@
-using System;
 using Item;
 using Unity.Netcode;
 using UnityEngine;
@@ -6,39 +5,37 @@ using UnityEngine;
 public class WeaponStats : NetworkBehaviour {
     [SerializeField] private Weapon weaponData;
     private SpriteRenderer _spriteRenderer;
-    private Transform _barrel;
+    private GameObject _attackPoint;
 
     private void Start() {
         // Set weapon sprite
-        if (!IsOwner) return;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = weaponData.itemSprite;
-        _barrel = weaponData.Setup(gameObject);
+        SetAttackPointPosition();
     }
 
     private void Update()
     {
         if (!IsOwner) return;
-        if (Input.GetMouseButton(0))
+        weaponData.DecreaseTimer();
+        if (Input.GetMouseButtonDown(0) && !weaponData.isAutomatic)
         {
-            if (IsServer)
-                AttackClientRpc();
-            else
-                AttackServerRpc();
+            AttackServerRpc();
         }
-        // if (IsOwner) AttackServerRpc();
+        else if (Input.GetMouseButton(0) && weaponData.isAutomatic)
+        {
+            AttackServerRpc();
+        }
     }
 
     // TODO figure out client shooting
     [ServerRpc(RequireOwnership = false)]
     private void AttackServerRpc() {
-        weaponData.Attack(transform);
-        // AttackClientRpc();
+        weaponData.Attack(_attackPoint.transform);
     }
-    
-    [ClientRpc]
-    private void AttackClientRpc()
-    {
-        weaponData.Attack(transform);
+
+    public void SetAttackPointPosition() {
+        _attackPoint = transform.GetChild(0).gameObject;
+        _attackPoint.transform.localPosition = weaponData.GetPosition();
     }
 }

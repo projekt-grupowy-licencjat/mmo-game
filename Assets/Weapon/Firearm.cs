@@ -5,30 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Weapons/Firearm")]
 public class Firearm : Weapon {
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Vector2 barrelPos;
-    [Range(0.1f, 2f)] [SerializeField] private float fireRate;
-    [SerializeField] private bool automatic;
+    [SerializeField] private Vector2 attackPointPosition;
+    [Range(0.05f, 2f)] [SerializeField] private float fireRate;
     private float _fireTimer;
-    private GameObject _barrel;
     
-    public override Transform Setup(GameObject parent) {
-        _barrel = new GameObject("barrel");
-        _barrel.transform.SetParent(parent.transform);
-        _barrel.transform.localPosition = barrelPos;
-        return _barrel.transform;
+    public override Vector3 GetPosition() {
+        return attackPointPosition;
     }
     
     public override void Attack(Transform barrel) {
-        if (_fireTimer <= 0f && automatic) {
-            var go = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
-            go.GetComponent<NetworkObject>().Spawn();
-            _fireTimer = fireRate;
-        }
-        else if (_fireTimer <= 0f && !automatic) {
-            var go = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
-            go.GetComponent<NetworkObject>().Spawn();
-            _fireTimer = fireRate;
-        }
-        else _fireTimer -= Time.deltaTime;
+        if (!(_fireTimer <= 0f)) return;
+        var go = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
+        go.GetComponent<NetworkObject>().Spawn();
+        _fireTimer = fireRate;
+    }
+    
+    public override void DecreaseTimer() {
+        if (_fireTimer <= 0f) return;
+        _fireTimer -= Time.deltaTime;
     }
 }

@@ -8,14 +8,17 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 1521af61f1b3c394795b1b289b8a2248
   - enabled: 0
     path: Assets/Scenes/NPCTest.unity
     guid: e679a31fe30e911868b468f29ed7c53d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Maciek.unity
     guid: 255c40c7a10efa744a34c7e268b79903
+  - enabled: 1
+    path: Assets/Scenes/Hub.unity
+    guid: 204fb254df98fc5499e8b470e2dede0d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 7faa2304ce195cd948561429a900c88a, type: 2}

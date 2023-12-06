@@ -15,18 +15,19 @@ namespace Item
         
         private void Start()
         {
+            // TODO change to addressables
             if (Instance != this)
             {
                 Instance = this;
             }
-            
-            string[] assetNames = AssetDatabase.FindAssets("ItemData", new[] { "Assets/Item/Instances" });
-            foreach (string soName in assetNames)
-            {
-                var soPath    = AssetDatabase.GUIDToAssetPath(soName);
-                var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(soPath);
-                itemScriptableObjects.Add(itemData.itemName, itemData);
-            }
+            //
+            // string[] assetNames = AssetDatabase.FindAssets("ItemData", new[] { "Assets/Item/Instances" });
+            // foreach (string soName in assetNames)
+            // {
+            //     var soPath    = AssetDatabase.GUIDToAssetPath(soName);
+            //     var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(soPath);
+            //     itemScriptableObjects.Add(itemData.itemName, itemData);
+            // }
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,10 +6,18 @@ namespace UIManager
 {
     public class UIManager : MonoBehaviour
     {
+        public static UIManager Instance { get; private set; }
+        
         [SerializeField] private List<KeycodeElement> keycodeElements;
         [SerializeField] private List<GameObject> staticElements;
         
         private List<ActiveElement> _activeElements;
+        
+        // Pause input handling
+        public bool isPaused;
+        public WeaponRotation weaponRotation;
+        public PlayerController playerController;
+        public CameraTarget cameraTarget;
 
         public void MakeTop(ElementManager elementManager)
         {
@@ -34,6 +41,8 @@ namespace UIManager
         
         private void Start()
         {
+            if (!Instance) Instance = this;
+            
             _activeElements = new List<ActiveElement>();
 
             foreach (var element in staticElements)
@@ -42,6 +51,9 @@ namespace UIManager
                 var elemCanvas = staticElem.GetComponent<Canvas>();
                 elemCanvas.sortingOrder = 2;
             }
+            
+            // Pause input handling
+            isPaused = false;
         }
 
         private void Update()
@@ -65,6 +77,26 @@ namespace UIManager
                 keycodeElements[keycodeIndex].Active = false;
                 Destroy(_activeElements[0].Element);
                 _activeElements.RemoveAt(0);
+            }
+            
+            HandleInputs();
+        }
+        private void HandleInputs() {
+            switch (isPaused) {
+                case true when _activeElements.Count == 0: {
+                    isPaused = false;
+                    weaponRotation.enabled = true;
+                    playerController.enabled = true;
+                    cameraTarget.enabled = true;
+                    break;
+                }
+                case false when _activeElements.Count > 0: {
+                    isPaused = true;
+                    weaponRotation.enabled = false;
+                    playerController.enabled = false;
+                    cameraTarget.enabled = false;
+                    break;
+                }
             }
         }
     }

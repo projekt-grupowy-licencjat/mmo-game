@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   morseMessage: 
+  dotSound: {fileID: 8300000, guid: 2bbb3df4fcc19364b9661fd31cfbe0bd, type: 3}
+  dashSound: {fileID: 8300000, guid: d3d85a803e3bbee4292b1b5a828301b8, type: 3}
 --- !u!82 &9109014940176837977
 AudioSource:
   m_ObjectHideFlags: 0
@@ -58,7 +60,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 5338521534982220685, guid: 1ac28c85cd1632f468b4173917163bb7, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public enum EnemyType { normal, hard, boss }
+    public enum EnemyType { Normal, Hard, Boss }
     public abstract class Enemy : ScriptableObject 
     {
         
@@ -14,23 +14,30 @@ namespace Enemy
         public EnemyType EnemyType { get; private set; }
         public Animator animation; // animator contains skin (sprite)
 
-        void move()
+        public void Idle()
         {
             
         }
 
-        void die()
-        {
-        }
-        
-        void getDamage() {}
-
-        void attack()
+        public void Follow()
         {
             
         }
-        
-        
+
+        public void Attack()
+        {
+            
+        }
+
+        public void Die()
+        {
+            
+        }
+
+        public void GetDamage()
+        {
+            
+        }
 
     }
 

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,7 +29,12 @@ public class MultiplayerMenu : MonoBehaviour
     { 
         var inputValue = input.text;
         Debug.Log("Podane ip to: " + inputValue +" /n");
-        
+        var split = inputValue.Split(":");
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(
+            split[0],
+            (ushort) int.Parse(split[1])
+        );
+        NetworkManager.Singleton.StartClient();
     }
 
     public void ClearInput()
@@ -44,6 +51,15 @@ public class MultiplayerMenu : MonoBehaviour
     private void HandleServerStarted()
     {
         if (NetworkManager.Singleton.IsHost)
+        {
+            var status = NetworkManager.Singleton.SceneManager.LoadScene("Hub", LoadSceneMode.Single);
+ 
+            if (status != SceneEventProgressStatus.Started)
+            {
+                Debug.LogWarning($"Failed to load Hub with a {nameof(SceneEventProgressStatus)}: {status}");
+            }
+        } 
+        else if (NetworkManager.Singleton.IsClient)
         {
             var status = NetworkManager.Singleton.SceneManager.LoadScene("Hub", LoadSceneMode.Single);
  

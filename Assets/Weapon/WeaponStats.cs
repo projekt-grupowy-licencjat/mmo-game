@@ -6,6 +6,7 @@ public class WeaponStats : NetworkBehaviour {
     [SerializeField] private Weapon weaponData;
     private SpriteRenderer _spriteRenderer;
     private GameObject _attackPoint;
+    // public CameraShake cameraShake;
 
     private void Start() {
         // Set weapon sprite
@@ -33,10 +34,13 @@ public class WeaponStats : NetworkBehaviour {
         // TODO Fix not being able to shoot as client when host is paused
         if (IsHost && UIManager.UIManager.Instance.isPaused) return;
         weaponData.Attack(_attackPoint.transform);
+        // StartCoroutine(cameraShake.Shake());
     }
 
     public void SetAttackPointPosition() {
         _attackPoint = transform.GetChild(0).gameObject;
         _attackPoint.transform.localPosition = weaponData.GetPosition();
     }
+
+    
 }

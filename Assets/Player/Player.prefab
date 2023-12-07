@@ -53,6 +53,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -74,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 961458835
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bc569c42ba53b9044a4bb1a2b4976af9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -156,9 +158,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8180149192897416110}
   - component: {fileID: 246218486039164013}
+  - component: {fileID: 1442268635185087689}
   - component: {fileID: 5329029297044632898}
   - component: {fileID: 1275040051918915756}
-  - component: {fileID: 1442268635185087689}
   - component: {fileID: -7544611465362017574}
   - component: {fileID: 7847275226171604295}
   - component: {fileID: -1368060498132179962}
@@ -205,6 +207,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -226,8 +230,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 309511365
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 796185300, guid: 64d1b90f6dba241138e689a1efa815e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -240,6 +244,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1442268635185087689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637684998583128433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2346141584
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &5329029297044632898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,26 +306,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1442268635185087689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637684998583128433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &-7544611465362017574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f5454e7ce5f5f4989f06bf20177921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  retryTime: 1
 --- !u!114 &-2254268784160591584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,9 +373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f086da0036243ee952850bb77b91e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Items: []
 --- !u!95 &1795326760508692493
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -384,6 +390,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

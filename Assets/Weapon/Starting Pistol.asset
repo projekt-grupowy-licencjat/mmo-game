@@ -18,4 +18,4 @@ MonoBehaviour:
   isAutomatic: 1
   bulletPrefab: {fileID: 40667721470021036, guid: 6838323be16bf0c41b3f580092b118e7, type: 3}
   attackPointPosition: {x: 0.9, y: 0.37}
-  fireRate: 0.05
+  fireRate: 0.227

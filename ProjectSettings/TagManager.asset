@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraTarget
   - UIManager
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 1
+  - name: Background
     uniqueID: 978480157
+    locked: 0
+  - name: Items
+    uniqueID: 961458835
+    locked: 0
+  - name: Players
+    uniqueID: 309511365
+    locked: 0
+  - name: Foreground
+    uniqueID: 3884942837
+    locked: 0
+  - name: UI
+    uniqueID: 1319254741
     locked: 0

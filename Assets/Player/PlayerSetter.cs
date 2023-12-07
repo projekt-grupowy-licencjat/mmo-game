@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -8,8 +7,13 @@ public class PlayerSetter : NetworkBehaviour
 {
     [SerializeField] private float retryTime = 1f;
     
+    private WeaponRotation _weaponRotation;
+    private PlayerController _playerController;
+    
     public void Start() {
         if (!IsOwner) return;
+        _weaponRotation = transform.GetChild(0).GetComponent<WeaponRotation>();
+        _playerController = GetComponent<PlayerController>();
         var coroutine = AssignValues();
         var uiCoroutine = AssignUI();
         StartCoroutine(coroutine);
@@ -24,19 +28,24 @@ public class PlayerSetter : NetworkBehaviour
         while (!succeeded)
         {
             CameraTarget cameraTarget = null;
+            Camera mainCamera = null;
             try
             {
                 cameraTarget = GameObject.FindWithTag("CameraTarget")
                     ?.GetComponent<CameraTarget>();
+                mainCamera = GameObject.FindWithTag("MainCamera")
+                    ?.GetComponent<Camera>();
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 Debug.Log("CameraTarget not found");
             }
 
-            if (cameraTarget != null)
+            if (cameraTarget != null && mainCamera != null)
             {
                 cameraTarget.player = transform;
+                _weaponRotation.cameraRef = mainCamera;
+                _playerController.cameraRef = mainCamera;
                 succeeded = true;
             }
             yield return new WaitForSeconds(retryTime);
@@ -55,7 +64,7 @@ public class PlayerSetter : NetworkBehaviour
                 uiManager = GameObject.FindWithTag("UIManager")
                     .GetComponent<UIManager.UIManager>();
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 Debug.Log("UI not found");
             }

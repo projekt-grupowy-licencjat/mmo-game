@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bd0182ae167954898d8cdd1e6e9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 8430315471715383610}
+  cameraRef: {fileID: 8430315471715383610}
   player: {fileID: 0}
   threshold: 1.99
 --- !u!1 &6360875771069446833

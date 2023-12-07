@@ -1,12 +1,13 @@
 using UnityEngine;
 
 public class CameraTarget : MonoBehaviour {
-    [SerializeField] private new Camera camera;
+    [SerializeField] private Camera cameraRef;
     [SerializeField] public Transform player;
     [SerializeField] private float threshold;
     
     private void Update() {
-        var mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+        if (!player) return;
+        var mousePosition = cameraRef.ScreenToWorldPoint(Input.mousePosition);
         var position = player.position;
         var targetPos = (position + mousePosition) / 2f;
 

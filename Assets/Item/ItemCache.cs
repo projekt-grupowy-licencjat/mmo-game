@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.AddressableAssets.Build;
+#endif
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.TextCore.Text;

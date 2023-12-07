@@ -9,13 +9,13 @@ public class PlayerSetter : NetworkBehaviour
     
     private WeaponRotation _weaponRotation;
     private PlayerController _playerController;
-    private WeaponStats _weaponStats;
+    // private WeaponStats _weaponStats;
     
     public void Start() {
         if (!IsOwner) return;
         _weaponRotation = transform.GetChild(0).GetComponent<WeaponRotation>();
         _playerController = GetComponent<PlayerController>();
-        _weaponStats = transform.GetChild(0).GetComponent<WeaponStats>();
+        // _weaponStats = transform.GetChild(0).GetComponent<WeaponStats>();
         var coroutine = AssignValues();
         var uiCoroutine = AssignUI();
         StartCoroutine(coroutine);
@@ -48,7 +48,7 @@ public class PlayerSetter : NetworkBehaviour
                 cameraTarget.player = transform;
                 _weaponRotation.cameraRef = mainCamera;
                 _playerController.cameraRef = mainCamera;
-                _weaponStats.cameraShake = cameraTarget.GetComponent<CameraShake>();
+                // _weaponStats.cameraShake = cameraTarget.GetComponent<CameraShake>();
                 succeeded = true;
             }
             yield return new WaitForSeconds(retryTime);

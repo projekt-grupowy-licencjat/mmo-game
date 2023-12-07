@@ -1,6 +1,5 @@
 using Unity.Netcode;
 using UnityEngine;
-
 namespace Enemy
 {
     public enum EnemyType { Normal, Hard, Boss }
@@ -50,7 +49,7 @@ namespace Enemy
             {
                 animation.SetTrigger("Hit");
             }
-            Debug.Log("Received ");
+            Debug.Log($"Received dmg");
         }
 
     }

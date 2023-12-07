@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.AddressableAssets.Build;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.TextCore.Text;
 
 namespace Item
@@ -9,6 +11,8 @@ namespace Item
     public class ItemCache : MonoBehaviour
     {
         public static ItemCache Instance { get; private set; }
+
+        public ItemDataCache toLoad;
         
         public Dictionary<string, ItemData> itemScriptableObjects = new Dictionary<string, ItemData>();
 
@@ -20,14 +24,12 @@ namespace Item
             {
                 Instance = this;
             }
-            //
-            // string[] assetNames = AssetDatabase.FindAssets("ItemData", new[] { "Assets/Item/Instances" });
-            // foreach (string soName in assetNames)
-            // {
-            //     var soPath    = AssetDatabase.GUIDToAssetPath(soName);
-            //     var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(soPath);
-            //     itemScriptableObjects.Add(itemData.itemName, itemData);
-            // }
+
+            foreach (var item in toLoad.forLoad)
+            {
+                itemScriptableObjects.Add(item.itemName, item);
+            }
+            
         }
     }
 }

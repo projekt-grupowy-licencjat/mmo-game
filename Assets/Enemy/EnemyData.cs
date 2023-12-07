@@ -3,36 +3,39 @@ using UnityEngine;
 namespace Enemy
 {
     public enum EnemyType { Normal, Hard, Boss }
-    public abstract class EnemyData : ScriptableObject 
+    public enum ActivityState { Idle, Follow, Fight }
+    public abstract class EnemyData : ScriptableObject
     {
-        public string Name { get; private set; }
-        public float Health { get; private set; }
-        public float AttackDamage { get; private set; }
-        public float DefencePoints { get; private set; }
-        public float MovementSpeed { get; private set; }
-        public EnemyType EnemyType { get; private set; }
-        public Inventory.Inventory Inventory { get; private set; }
-        public Animator animation; // animator contains skin (sprite)
+        public string Name;
+        public float Health;
+        public float AttackDamage;
+        public float DefencePoints;
+        public float MovementSpeed;
+        public ActivityState ActivityState;
+        public EnemyType EnemyType;
+        public Inventory.Inventory Inventory;
+        public Sprite enemySprite;
+        public Animator Animator; // animator contains skin (sprite)
 
-        public void Idle()
+        virtual public void Idle()
         {
-            
+            Debug.Log($"Enemy {this.Name} is in {this.ActivityState} mode, should be IDLE");
         }
 
         public void Follow()
         {
+            Debug.Log($"Enemy {this.Name} is in {this.ActivityState} mode, should be FOLLOW");
             
         }
 
-        public void Attack()
+        public void Fight()
         {
-            
+            Debug.Log($"Enemy {this.Name} is in {this.ActivityState} mode, should be FIGHT");
         }
 
         private void Die()
         {
-            // todo: play death animation 
-            // animation.SetTrigger("Die");
+            // todo: trigger death animation
             Debug.Log($"Enemy {this.Name} has died");
             // todo: drop inventory and desintegrate
             
@@ -47,7 +50,7 @@ namespace Enemy
             }
             else
             {
-                animation.SetTrigger("Hit");
+                // todo: trigger animation of getting dmg
             }
             Debug.Log($"Received dmg");
         }

@@ -7024,6 +7024,57 @@ Transform:
   - {fileID: 10959997}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &839945013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3041914869041663948, guid: 1f02ebeda9dc3f06ba9112c267c329cc, type: 3}
+  m_PrefabInstance: {fileID: 1021499544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &839945016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839945013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3e322f9ec447998df52c3c5a20cc9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.17568956
+      outSlope: 0.17568956
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.21272025
+      value: 0.037372727
+      inSlope: -0.1135314
+      outSlope: -0.1135314
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.041607223
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.00013070754
+      outSlope: -0.00013070754
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12566268
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoilDuration: 0.5
 --- !u!1001 &1021499544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7079,7 +7130,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3041914869041663948, guid: 1f02ebeda9dc3f06ba9112c267c329cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 839945016}
   m_SourcePrefab: {fileID: 100100000, guid: 1f02ebeda9dc3f06ba9112c267c329cc, type: 3}
 --- !u!1 &1365837292
 GameObject:

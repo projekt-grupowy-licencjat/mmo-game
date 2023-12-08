@@ -41,7 +41,8 @@ namespace Enemy
             
         }
 
-        virtual public void GetDamage()
+        // this methode should be in object not in data, cuz it renders animations etc.
+        virtual public void ReceiveDamage()
         {
             
             if (this.Health <= 0)
@@ -51,6 +52,7 @@ namespace Enemy
             else
             {
                 // todo: trigger animation of getting dmg
+                
             }
             Debug.Log($"Received dmg");
         }

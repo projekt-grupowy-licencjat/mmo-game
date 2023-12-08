@@ -21,17 +21,19 @@ namespace Enemy
             _spriteRenderer.sprite = data.enemySprite;
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.name == "Bullet") 
+            // wip, placeholder for animation
+            if (other.gameObject.name == "Bullet(Clone)")
             {
-                Debug.Log("got hit!");
-            } else 
+                _spriteRenderer.color = Color.red;
+                data.ReceiveDamage();
+            }
+            else
             {
                 Debug.Log("something went into collision xd");
             }
-            Debug.Log("sad");
-            
         }
-    }
+        
+    } 
 }

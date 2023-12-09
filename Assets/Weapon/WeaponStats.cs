@@ -6,7 +6,7 @@ public class WeaponStats : NetworkBehaviour {
     [SerializeField] private Weapon weaponData;
     private SpriteRenderer _spriteRenderer;
     private GameObject _attackPoint;
-    private float _fireTimer;
+    private float _attackTimer;
     // public CameraShake cameraShake;
 
     private void Start() {
@@ -16,18 +16,18 @@ public class WeaponStats : NetworkBehaviour {
     private void Update()
     {
         if (!IsOwner) return;
-        if (_fireTimer > 0f) _fireTimer -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && !weaponData.isAutomatic && _fireTimer <= 0f)
+        if (_attackTimer > 0f) _attackTimer -= Time.deltaTime;
+        if (Input.GetMouseButtonDown(0) && !weaponData.isAutomatic && _attackTimer <= 0f)
         {
             if (UIManager.UIManager.Instance.isPaused) return;
             AttackServerRpc();
-            _fireTimer = weaponData.fireRate;
+            _attackTimer = weaponData.attackSpeed;
         }
-        else if (Input.GetMouseButton(0) && weaponData.isAutomatic && _fireTimer <= 0f)
+        else if (Input.GetMouseButton(0) && weaponData.isAutomatic && _attackTimer <= 0f)
         {
             if (UIManager.UIManager.Instance.isPaused) return;
             AttackServerRpc();
-            _fireTimer = weaponData.fireRate;
+            _attackTimer = weaponData.attackSpeed;
         }
     }
     
@@ -43,7 +43,7 @@ public class WeaponStats : NetworkBehaviour {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = weaponData.itemSprite;
         
-        _fireTimer = weaponData.fireRate;
+        _attackTimer = weaponData.attackSpeed;
         
         _attackPoint = transform.GetChild(0).gameObject;
         _attackPoint.transform.localPosition = weaponData.attackPointPosition;

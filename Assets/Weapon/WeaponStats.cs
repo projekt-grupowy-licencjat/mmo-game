@@ -6,40 +6,47 @@ public class WeaponStats : NetworkBehaviour {
     [SerializeField] private Weapon weaponData;
     private SpriteRenderer _spriteRenderer;
     private GameObject _attackPoint;
+    private float _fireTimer;
     // public CameraShake cameraShake;
 
     private void Start() {
-        // Set weapon sprite
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = weaponData.itemSprite;
-        SetAttackPointPosition();
+        SetWeaponAttributes();
     }
 
     private void Update()
     {
         if (!IsOwner) return;
-        weaponData.DecreaseTimer();
-        if (Input.GetMouseButtonDown(0) && !weaponData.isAutomatic)
+        if (_fireTimer > 0f) _fireTimer -= Time.deltaTime;
+        if (Input.GetMouseButtonDown(0) && !weaponData.isAutomatic && _fireTimer <= 0f)
         {
+            if (UIManager.UIManager.Instance.isPaused) return;
             AttackServerRpc();
+            _fireTimer = weaponData.fireRate;
         }
-        else if (Input.GetMouseButton(0) && weaponData.isAutomatic)
+        else if (Input.GetMouseButton(0) && weaponData.isAutomatic && _fireTimer <= 0f)
         {
+            if (UIManager.UIManager.Instance.isPaused) return;
             AttackServerRpc();
+            _fireTimer = weaponData.fireRate;
         }
     }
     
     [ServerRpc(RequireOwnership = false)]
     private void AttackServerRpc() {
-        // TODO Fix not being able to shoot as client when host is paused
-        if (IsHost && UIManager.UIManager.Instance.isPaused) return;
         weaponData.Attack(_attackPoint.transform);
+
+        // TODO use this somewhere else
         // StartCoroutine(cameraShake.Shake());
     }
 
-    public void SetAttackPointPosition() {
+    public void SetWeaponAttributes() {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = weaponData.itemSprite;
+        
+        _fireTimer = weaponData.fireRate;
+        
         _attackPoint = transform.GetChild(0).gameObject;
-        _attackPoint.transform.localPosition = weaponData.GetPosition();
+        _attackPoint.transform.localPosition = weaponData.attackPointPosition;
     }
 
     

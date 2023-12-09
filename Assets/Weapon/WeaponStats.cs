@@ -39,7 +39,12 @@ public class WeaponStats : NetworkBehaviour {
         // StartCoroutine(cameraShake.Shake());
     }
 
-    public void SetWeaponAttributes() {
+    public void ChangeWeapon(Weapon weaponData)
+    {
+        this.weaponData = weaponData;
+        SetWeaponAttributes();
+    }
+    private void SetWeaponAttributes() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = weaponData.itemSprite;
         

@@ -1,3 +1,4 @@
+using System;
 using Item;
 using TMPro;
 using UnityEngine;
@@ -13,25 +14,49 @@ namespace UIManager.Inventory
         private TextMeshProUGUI _text;
         private Image _image;
         private Button _drop;
+        private Button _equip;
+        public WeaponStats playerWeapon;
+        public GameObject weaponPanel;
+        public Image weaponImage;
         
         private void Start()
         {
             
-            _text = GameObject.Find("Text").GetComponent<TextMeshProUGUI>();
-            _image = GameObject.Find("Image").GetComponent<Image>();
-            _drop = GameObject.Find("Drop").GetComponent<Button>();
+            _text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            _image = gameObject.GetComponentInChildren<Image>();
+            var buttons = gameObject.GetComponentsInChildren<Button>();
+            _drop = buttons[1];
+            _equip = buttons[0];
             
             _text.text = itemData.itemName;
             _image.sprite = itemData.itemSprite;
             _drop.onClick.AddListener(DropItem);
+            _equip.onClick.AddListener(EquipWeapon);
+
+            try
+            {
+                var a = (Weapon)itemData;
+            }
+            catch (Exception e) // TODO
+            {
+                Destroy(_equip.gameObject);
+            }
+
+            weaponImage = weaponPanel.GetComponent<Image>();
         }
 
         private void DropItem()
         {
-            // TODO: Specify position here and change it in manager to handle it ? or here
-            ItemManager.Instance.CreateItem(itemData);
+            var pos = playerInventory.gameObject.transform.position;
+            ItemManager.Instance.CreateItem(itemData, pos.x, pos.y);
             playerInventory.RemoveItem(itemData);
             Destroy(gameObject);
+        }
+
+        private void EquipWeapon()
+        {
+            playerWeapon.ChangeWeapon((Weapon)itemData);
+            weaponImage.sprite = itemData.itemSprite;
         }
     }
 }

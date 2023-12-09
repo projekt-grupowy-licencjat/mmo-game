@@ -21,6 +21,7 @@ namespace Item
             if (!gameObject.GetComponent<SpriteRenderer>())
                 _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
             _spriteRenderer.sprite = data.itemSprite;
+            _spriteRenderer.sortingLayerName = "Items";
         }
     }
 }

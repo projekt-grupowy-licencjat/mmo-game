@@ -19,6 +19,4 @@ MonoBehaviour:
   MovementSpeed: 0
   ActivityState: 0
   EnemyType: 0
-  Inventory: {fileID: 0}
-  enemySprite: {fileID: 796185300, guid: 64d1b90f6dba241138e689a1efa815e9, type: 3}
-  Animator: {fileID: 0}
+  sprite: {fileID: 1116681683, guid: 264074e9b922d4962a98c4b0fabb0223, type: 3}

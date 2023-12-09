@@ -140,6 +140,18 @@ PrefabInstance:
       value: Dummy
       objectReference: {fileID: 0}
     - target: {fileID: 1146764424971038932, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146764424971038932, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146764424971038932, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146764424971038932, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -179,6 +191,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1146764424971038932, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490788310978373132, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490788310978373132, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490788310978373132, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -195,6 +223,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 578597508872043252, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1059960473}
+    - targetCorrespondingSourceObject: {fileID: 578597508872043252, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1059960479}
   m_SourcePrefab: {fileID: 100100000, guid: 244a5d6ee45964964aff491d21e36a57, type: 3}
 --- !u!1001 &388984625
 PrefabInstance:
@@ -563,18 +594,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0069384053, y: -0.02480691}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.12753211, y: 0.38297796}
   m_EdgeRadius: 0
 --- !u!114 &1059960473
 MonoBehaviour:
@@ -618,6 +649,27 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!95 &1059960479
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059960466}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6d2b8ed7a9ac44c199d39ed9f54393b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1616324635
 PrefabInstance:
   m_ObjectHideFlags: 0

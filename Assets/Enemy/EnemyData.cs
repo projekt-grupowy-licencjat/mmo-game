@@ -13,9 +13,8 @@ namespace Enemy
         public float MovementSpeed;
         public ActivityState ActivityState;
         public EnemyType EnemyType;
-        public Inventory.Inventory Inventory;
-        public Sprite enemySprite;
-        public Animator Animator; // animator contains skin (sprite)
+        // public Inventory.Inventory Inventory;
+        public Sprite sprite;
 
         virtual public void Idle()
         {

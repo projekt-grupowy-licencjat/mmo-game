@@ -22,11 +22,15 @@ namespace UIManager.Inventory
         private void Start()
         {
             
-            _text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            _image = gameObject.GetComponentInChildren<Image>();
-            var buttons = gameObject.GetComponentsInChildren<Button>();
-            _drop = buttons[1];
-            _equip = buttons[0];
+            // _text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            // _image = gameObject.GetComponentInChildren<Image>();
+            // var buttons = gameObject.GetComponentsInChildren<Button>();
+            // _drop = buttons[1];
+            // _equip = buttons[0];
+            _text = gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            _image = gameObject.transform.GetChild(2).GetComponent<Image>();
+            _equip = gameObject.transform.GetChild(0).GetComponent<Button>();
+            _drop = gameObject.transform.GetChild(3).GetComponent<Button>();
             
             _text.text = itemData.itemName;
             _image.sprite = itemData.itemSprite;

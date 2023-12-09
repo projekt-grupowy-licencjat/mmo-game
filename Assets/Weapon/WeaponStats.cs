@@ -10,12 +10,14 @@ public class WeaponStats : NetworkBehaviour {
     // public CameraShake cameraShake;
 
     private void Start() {
+        if (!weaponData) return;
         SetWeaponAttributes();
     }
 
     private void Update()
     {
         if (!IsOwner) return;
+        if (!weaponData) return;
         if (_attackTimer > 0f) _attackTimer -= Time.deltaTime;
         if (Input.GetMouseButtonDown(0) && !weaponData.isAutomatic && _attackTimer <= 0f)
         {
@@ -39,11 +41,11 @@ public class WeaponStats : NetworkBehaviour {
         // StartCoroutine(cameraShake.Shake());
     }
 
-    public void ChangeWeapon(Weapon weaponData)
-    {
-        this.weaponData = weaponData;
+    public void ChangeWeapon(Weapon newWeaponData) {
+        weaponData = newWeaponData;
         SetWeaponAttributes();
     }
+    
     private void SetWeaponAttributes() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = weaponData.itemSprite;

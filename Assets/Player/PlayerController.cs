@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class PlayerController : NetworkBehaviour {   
     [SerializeField] private float moveSpeed;
-    public NetworkVariable<Vector2> position = new NetworkVariable<Vector2>();
     public Camera cameraRef;
-    private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     
     private Rigidbody2D _rigidBody;
@@ -15,7 +13,6 @@ public class PlayerController : NetworkBehaviour {
 
     private void Start() {
         _rigidBody = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         
         // Limiting framerate for testing

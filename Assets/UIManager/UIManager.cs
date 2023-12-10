@@ -15,9 +15,9 @@ namespace UIManager
         
         // Pause input handling
         public bool isPaused;
-        public WeaponRotation weaponRotation;
-        public PlayerController playerController;
-        public CameraTarget cameraTarget;
+        // public WeaponRotation weaponRotation;
+        // public PlayerController playerController;
+        // public CameraTarget cameraTarget;
 
         public void MakeTop(ElementManager elementManager)
         {
@@ -86,22 +86,27 @@ namespace UIManager
             HandleInputs();
         }
         private void HandleInputs() {
-            switch (isPaused) {
-                case true when _activeElements.Count == 0: {
-                    isPaused = false;
-                    weaponRotation.enabled = true;
-                    playerController.enabled = true;
-                    cameraTarget.enabled = true;
-                    break;
-                }
-                case false when _activeElements.Count > 0: {
-                    isPaused = true;
-                    weaponRotation.enabled = false;
-                    playerController.enabled = false;
-                    cameraTarget.enabled = false;
-                    break;
-                }
-            }
+            isPaused = isPaused switch {
+                true when _activeElements.Count == 0 => false,
+                false when _activeElements.Count > 0 => true,
+                _ => isPaused
+            };
+            // switch (isPaused) {
+            //     case true when _activeElements.Count == 0: {
+            //         isPaused = false;
+            //         // weaponRotation.enabled = true;
+            //         // playerController.enabled = true;
+            //         // cameraTarget.enabled = true;
+            //         break;
+            //     }
+            //     case false when _activeElements.Count > 0: {
+            //         isPaused = true;
+            //         // weaponRotation.enabled = false;
+            //         // playerController.enabled = false;
+            //         // cameraTarget.enabled = false;
+            //         break;
+            //     }
+            // }
         }
     }
 }

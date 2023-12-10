@@ -8,6 +8,7 @@ public class WeaponRotation : NetworkBehaviour {
     private Transform _localTransform;
     private Vector3 _localScale;
     [SerializeField] private float maxThreshold;
+    public UIManager.UIManager uiManager;
 
     private void Start() {
         if (!IsOwner) return;
@@ -19,6 +20,7 @@ public class WeaponRotation : NetworkBehaviour {
     private void Update() {
         if (!IsOwner) return;
         if (!cameraRef) return;
+        if (uiManager.isPaused) return;
         _localTransform = transform;
         Vector2 mouseScreenPosition = cameraRef.ScreenToWorldPoint(Input.mousePosition);
         Vector2 position = _localTransform.parent.gameObject.transform.position;

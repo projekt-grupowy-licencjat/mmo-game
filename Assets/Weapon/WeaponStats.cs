@@ -7,6 +7,7 @@ public class WeaponStats : NetworkBehaviour {
     private SpriteRenderer _spriteRenderer;
     private GameObject _attackPoint;
     private float _attackTimer;
+    public UIManager.UIManager uiManager;
     // public CameraShake cameraShake;
 
     private void Start() {
@@ -21,13 +22,13 @@ public class WeaponStats : NetworkBehaviour {
         if (_attackTimer > 0f) _attackTimer -= Time.deltaTime;
         if (Input.GetMouseButtonDown(0) && !weaponData.isAutomatic && _attackTimer <= 0f)
         {
-            if (UIManager.UIManager.Instance.isPaused) return;
+            if (uiManager.isPaused) return;
             AttackServerRpc();
             _attackTimer = weaponData.attackSpeed;
         }
         else if (Input.GetMouseButton(0) && weaponData.isAutomatic && _attackTimer <= 0f)
         {
-            if (UIManager.UIManager.Instance.isPaused) return;
+            if (uiManager.isPaused) return;
             AttackServerRpc();
             _attackTimer = weaponData.attackSpeed;
         }

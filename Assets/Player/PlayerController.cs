@@ -10,6 +10,7 @@ public class PlayerController : NetworkBehaviour {
     private Vector2 _movement;
     private static readonly int IsRunning = Animator.StringToHash("IsRunning");
     private static readonly int Reversed = Animator.StringToHash("Reversed");
+    public UIManager.UIManager uiManager;
 
     private void Start() {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -23,6 +24,7 @@ public class PlayerController : NetworkBehaviour {
     private void Update() {
         if (!IsOwner) return;
         if (!cameraRef) return;
+        if (uiManager.isPaused) return;
         var transform1 = transform;
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
@@ -42,6 +44,7 @@ public class PlayerController : NetworkBehaviour {
     
     private void FixedUpdate() {
         if (!IsOwner) return;
+        if (uiManager.isPaused) return;
         _movement.Normalize();
         _rigidBody.MovePosition(_rigidBody.position + _movement * (moveSpeed * Time.fixedDeltaTime));
     }

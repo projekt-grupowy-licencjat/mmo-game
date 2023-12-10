@@ -52,7 +52,7 @@ public class MultiplayerMenu : MonoBehaviour
     {
         if (NetworkManager.Singleton.IsHost)
         {
-            var status = NetworkManager.Singleton.SceneManager.LoadScene("Hub", LoadSceneMode.Single);
+            var status = NetworkManager.Singleton.SceneManager.LoadScene("Maciek", LoadSceneMode.Single);
  
             if (status != SceneEventProgressStatus.Started)
             {
@@ -61,7 +61,7 @@ public class MultiplayerMenu : MonoBehaviour
         } 
         else if (NetworkManager.Singleton.IsClient)
         {
-            var status = NetworkManager.Singleton.SceneManager.LoadScene("Hub", LoadSceneMode.Single);
+            var status = NetworkManager.Singleton.SceneManager.LoadScene("Maciek", LoadSceneMode.Single);
  
             if (status != SceneEventProgressStatus.Started)
             {

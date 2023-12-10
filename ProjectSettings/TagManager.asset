@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CameraTarget
   - UIManager
+  - Weapon
+  - Bullet
   layers:
   - Default
   - TransparentFX

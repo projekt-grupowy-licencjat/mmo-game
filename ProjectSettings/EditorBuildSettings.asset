@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maciek.unity
     guid: 255c40c7a10efa744a34c7e268b79903
+  - enabled: 1
+    path: Assets/Scenes/Dummy.unity
+    guid: c2cfc5b27193441c1970e5de0da87e65
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 7faa2304ce195cd948561429a900c88a, type: 2}

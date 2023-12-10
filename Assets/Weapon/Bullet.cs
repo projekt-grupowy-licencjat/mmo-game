@@ -7,7 +7,8 @@ public class Bullet : NetworkBehaviour {
 
     private Rigidbody2D _rb;
 
-    private void Start() {
+    private void Start()
+    {
         _rb = GetComponent<Rigidbody2D>();
         if (IsServer)
         {

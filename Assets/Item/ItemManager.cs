@@ -41,6 +41,9 @@ namespace Item
         {
             var o = item.gameObject;
             localInventory.AddItem(item.data);
+            // TODO PRESENTATION ONLY
+            localInventory.gameObject.GetComponentInChildren<WeaponStats>().ChangeWeapon((Weapon) item.data);
+            
             if (IsServer) o.GetComponent<NetworkObject>().Despawn();
             else HandlePickupServerRpc(o.GetComponent<NetworkObject>());
         }

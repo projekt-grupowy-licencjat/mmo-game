@@ -9,10 +9,13 @@ namespace UIManager.Inventory
         // Tells the inventory view to which prefab map the items
         public GameObject itemPanelPrefab;
         public GameObject content;
+        public GameObject weaponPanel;
         
         private void Start()
         {
-            inventory = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<global::Inventory.Inventory>();
+            var localPlayer = NetworkManager.Singleton.LocalClient.PlayerObject;
+            inventory = localPlayer.GetComponent<global::Inventory.Inventory>();
+            var weaponStats = localPlayer.GetComponentInChildren<WeaponStats>();
             
             foreach (var item in inventory.Items)
             {
@@ -20,6 +23,8 @@ namespace UIManager.Inventory
                 var inventoryElement = itemPanel.GetComponent<InventoryElement>();
                 inventoryElement.itemData = item;
                 inventoryElement.playerInventory = inventory;
+                inventoryElement.playerWeapon = weaponStats;
+                inventoryElement.weaponPanel = weaponPanel;
             }
         }
     }

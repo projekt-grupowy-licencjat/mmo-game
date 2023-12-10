@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class PlayerController : NetworkBehaviour {   
     [SerializeField] private float moveSpeed;
-    public NetworkVariable<Vector2> position = new NetworkVariable<Vector2>();
-    private Camera _camera;
-    private SpriteRenderer _spriteRenderer;
+    public Camera cameraRef;
     private Animator _animator;
     
     private Rigidbody2D _rigidBody;
@@ -15,9 +13,7 @@ public class PlayerController : NetworkBehaviour {
 
     private void Start() {
         _rigidBody = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        _camera = Camera.main;
         
         // Limiting framerate for testing
         // QualitySettings.vSyncCount = 0;
@@ -26,15 +22,17 @@ public class PlayerController : NetworkBehaviour {
 
     private void Update() {
         if (!IsOwner) return;
+        if (!cameraRef) return;
+        var transform1 = transform;
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
         
         // Flip player
-        Vector2 mouseScreenPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-        var mousePosToPlayer = mouseScreenPosition - (Vector2)transform.position;
-        var transformLocalScale = transform.localScale;
+        Vector2 mouseScreenPosition = cameraRef.ScreenToWorldPoint(Input.mousePosition);
+        var mousePosToPlayer = mouseScreenPosition - (Vector2)transform1.position;
+        var transformLocalScale = transform1.localScale;
         transformLocalScale.x = mousePosToPlayer.x < 0 ? -1 : 1;
-        transform.localScale = transformLocalScale;
+        transform1.localScale = transformLocalScale;
         
         // Animator
         _animator.SetBool(IsRunning, _movement != Vector2.zero);

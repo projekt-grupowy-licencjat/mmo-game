@@ -70,8 +70,12 @@ namespace UIManager
                     _activeElements.Insert(0, new ActiveElement(index, newElement));
                 }
             }
-
+            
+            #if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.X) && _activeElements.Count != 0)
+            #else
             if (Input.GetKeyDown(KeyCode.Escape) && _activeElements.Count != 0)
+            #endif
             {
                 var keycodeIndex = _activeElements[0].KeycodeElementIndex;
                 keycodeElements[keycodeIndex].Active = false;

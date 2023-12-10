@@ -7,9 +7,9 @@ namespace Item
     public class DebugItemSpawner : NetworkBehaviour
     {
         public List<ItemData> spawnItems;
-        private float timer = 10f;
+        private float timer = 2f;
         private bool notDone = true;
-        
+        private float temp = 0;
         private void Update()
         {
             if (!IsServer) return;
@@ -17,7 +17,8 @@ namespace Item
             {
                 foreach (var item in spawnItems)
                 {
-                    ItemManager.Instance.CreateItem(item, 2, 2);
+                    ItemManager.Instance.CreateItem(item, 2 + temp, 2);
+                    temp += 2;
                 }
                 notDone = false;
             }

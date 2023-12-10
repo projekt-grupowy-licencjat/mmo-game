@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Vector2 = System.Numerics.Vector2;
 
 namespace Item
 {
@@ -21,10 +23,10 @@ namespace Item
     }
     
     public abstract class Weapon : Wearable {
-        // TODO possible additional fields/methods
         public bool isAutomatic;
+        [Range(0.05f, 2f)] public float attackSpeed;
+        public float damage;
+        public Vector3 attackPointPosition;
         public abstract void Attack(Transform barrel);
-        public abstract Vector3 GetPosition();
-        public abstract void DecreaseTimer();
     }
 }

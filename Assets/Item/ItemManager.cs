@@ -36,17 +36,58 @@ namespace Item
                 HandlePickup(result.Item2);
             }
         }
-        
+        // TODO
         private void HandlePickup(ItemObject item)
         {
             var o = item.gameObject;
             localInventory.AddItem(item.data);
             // TODO PRESENTATION ONLY
-            localInventory.gameObject.GetComponentInChildren<WeaponStats>().ChangeWeapon((Weapon) item.data);
+            var weaponStats = localInventory.gameObject.GetComponentInChildren<WeaponStats>();
+            weaponStats.ChangeWeapon((Weapon) item.data);
+            if (IsServer)
+            {
+                SetWeaponClientRpc(weaponStats.transform.parent.gameObject, item.data.itemName);
+            }
+            else {
+                SetWeaponServerRpc(weaponStats.transform.parent.gameObject, item.data.itemName);
+            }
+            // TODO
             
             if (IsServer) o.GetComponent<NetworkObject>().Despawn();
             else HandlePickupServerRpc(o.GetComponent<NetworkObject>());
         }
+
+        [ClientRpc]
+        private void SetWeaponClientRpc(NetworkObjectReference netRef, string itemName)
+        {
+            NetworkObject player;
+            bool result = netRef.TryGet(out player, NetworkManager.Singleton);
+            if (!result)
+            {
+                Debug.LogError("Couldn't find item.");
+                return;
+            }
+
+            var weapon = ItemCache.Instance.itemScriptableObjects[itemName];
+            player.GetComponentInChildren<WeaponStats>().ChangeWeapon((Weapon) weapon);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void SetWeaponServerRpc(NetworkObjectReference netRef,
+            string itemName)
+        {
+            NetworkObject player;
+            bool result = netRef.TryGet(out player, NetworkManager.Singleton);
+            if (!result)
+            {
+                Debug.LogError("Couldn't find item.");
+                return;
+            }
+
+            var weapon = ItemCache.Instance.itemScriptableObjects[itemName];
+            player.GetComponentInChildren<WeaponStats>().ChangeWeapon((Weapon) weapon);
+        }
+        // TODO
         
         [ServerRpc(RequireOwnership = false)]
         private void HandlePickupServerRpc(NetworkObjectReference netRef)

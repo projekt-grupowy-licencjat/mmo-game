@@ -83,6 +83,7 @@ namespace Item
                 Debug.LogError("Couldn't find item.");
                 return;
             }
+            SetWeaponClientRpc(netRef, itemName);
 
             var weapon = ItemCache.Instance.itemScriptableObjects[itemName];
             player.GetComponentInChildren<WeaponStats>().ChangeWeapon((Weapon) weapon);
